@@ -1,16 +1,16 @@
 version: "3.7"
 services:
   plex-server:
-      container_name: plex-server
-      image: plexinc/pms-docker:latest
-      restart: unless-stopped
-      ports:
+    container_name: plex-server
+    image: plexinc/pms-docker:latest
+    restart: unless-stopped
+    ports:
       - "32400:32400"
-      environment:
-        - TZ=${TZ} # timezone, defined in .env
-      volumes:
-        - ${ROOT}:/data # media library
-        - ${ROOT}/config/plex/db:/config # plex database
+    environment:
+      - TZ=${TZ} # timezone, defined in .env
+    volumes:
+      - ${ROOT}:/data # media library
+      - ${ROOT}/config/plex/db:/config # plex database
   
   deluge:
     container_name: deluge
@@ -37,7 +37,6 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - ${ROOT}/downloads/torrent-blackhole:/downloads # place where to put .torrent files for manual download
       - ${ROOT}/config/jackett:/config # config files
 
@@ -52,7 +51,6 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - ${ROOT}/config/sonarr:/config # config files
       - ${ROOT}/Series:/series # series folder
       - ${ROOT}/downloads:/downloads # download folder
@@ -68,7 +66,6 @@ services:
       - PGID=${PGID} # default group id, defined in .env
       - TZ=${TZ} # timezone, defined in .env
     volumes:
-      - /etc/localtime:/etc/localtime:ro
       - ${ROOT}/config/radarr:/config # config files
       - ${ROOT}/Movies:/movies # movies folder
       - ${ROOT}/downloads:/downloads # download folder
