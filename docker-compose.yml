@@ -8,6 +8,7 @@ services:
       - ${ROOT}/cache:/cache
       - ${ROOT}/series:/series
       - ${ROOT}/movies:/movies
+      - ${ROOT}/jellyshare:/jellyshare
     restart: 'unless-stopped'
     # Optional - may be necessary for docker healthcheck to pass if running in host network mode
     extra_hosts:
