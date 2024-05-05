@@ -3,17 +3,17 @@ plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
     alias(libs.plugins.kotlin.kapt)
-    alias(libs.plugins.hilt)
     alias(libs.plugins.androidx.baselineprofile)
+    alias(libs.plugins.hilt)
 }
 
 android {
-    compileSdk = libs.versions.compileSdk.get().toInt()
+    compileSdk = 34
 
     defaultConfig {
         namespace = "fr.nexhub.homedia"
-        minSdk = libs.versions.minSdkTv.get().toInt()
-        targetSdk = libs.versions.targetSdk.get().toInt()
+        minSdk = 28
+        targetSdk = 34
         versionCode = 1
         versionName = "1.0"
     }
@@ -70,14 +70,23 @@ dependencies {
     implementation(libs.bundles.compose.accompanist)
 
     implementation(libs.hilt.android)
+    kapt(libs.hilt.android.compiler)
+    implementation(libs.androidx.hilt.navigation.compose)
+
     implementation(libs.profileinstaller)
     "baselineProfile"(project(":baselineprofile"))
-    kapt(libs.hilt.compiler)
-    implementation(libs.androidx.hilt.navigation.compose)
 
     implementation(libs.androidx.lifecycle.viewModelCompose)
     implementation(libs.qrcode)
     implementation(libs.line.awesome.icons)
+
+    implementation(libs.arrow.core)
+    implementation(libs.arrow.fx.coroutines)
+
+    implementation(libs.retrofit)
+    implementation(libs.converter.gson)
+
+    implementation(libs.jellyfin.core.android)
 
     androidTestImplementation(platform(libs.compose.bom))
 }

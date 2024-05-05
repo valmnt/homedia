@@ -2,7 +2,7 @@ package fr.nexhub.homedia.benchmark
 
 import androidx.benchmark.macro.MacrobenchmarkScope
 import androidx.test.uiautomator.By
-import com.nexhub.utils.testing.SKIP_TAG
+import fr.nexhub.utils.testing.SKIP_TAG
 
 
 fun MacrobenchmarkScope.skip() {

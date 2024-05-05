@@ -6,4 +6,16 @@
     <string name="movie_name">Batman</string>
     <string name="release_year">2022</string>
     <string name="movie_duration_text">2h 56mm</string>
+
+    // Network error
+    <string name="unable_to_connect_to_the_server">Unable to connect to the server</string>
+    <string name="the_operation_could_not_be_completed">The operation could not be completed</string>
+    <string name="the_server_could_not_process_the_request">The server could not process the request</string>
+    <string name="access_is_denied_due_to_invalid_credentials">Access is denied due to invalid credentials</string>
+    <string name="the_requested_resource_could_not_be_located_on_the_server">The requested resource could not be located on the server</string>
+    <string name="the_server_encountered_an_unexpected_condition">The server encountered an unexpected condition</string>
+
+    // Server screen
+    <string name="ip_or_domain_name">IP or domain name</string>
+    <string name="submit">Submit</string>
 </resources>

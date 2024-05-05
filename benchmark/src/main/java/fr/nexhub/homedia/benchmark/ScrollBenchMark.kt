@@ -22,7 +22,7 @@ class ComposeScrollPerformanceBenchmark {
 
     @Test
     fun composeScrollPerformanc() = benchmarkRule.measureRepeated(
-        packageName = "com.nexhub.homedia",
+        packageName = "fr.nexhub.homedia",
         metrics = listOf(FrameTimingMetric()),
         // Try switching to different compilation modes to see the effect
         // it has on frame timing metrics.

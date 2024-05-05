@@ -17,13 +17,21 @@ import fr.nexhub.homedia.features.login.withEmailPassword.LoginScreen
 import fr.nexhub.homedia.features.login.withToken.DeviceTokenAuthenticationScreen
 import fr.nexhub.homedia.features.mp3.player.AudioPlayerScreen
 import fr.nexhub.homedia.features.player.PlayerScreen
+import fr.nexhub.homedia.features.server.registration.presentation.ServerRegistrationScreen
 import fr.nexhub.homedia.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel) {
-    AnimatedNavHost(navController = navController, startDestination = Screens.LoginToken.title) {
-        // e.g will add auth routes here if when we will extend project
+    AnimatedNavHost(navController = navController, startDestination = Screens.ServerRegistration.title) {
+        composable(
+            Screens.ServerRegistration.title,
+        ) {
+            ServerRegistrationScreen {
+                navController.navigateSingleTopTo(Screens.LoginToken.title)
+            }
+        }
+
         composable(
             Screens.Login.title,
         ) {

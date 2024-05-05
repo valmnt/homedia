@@ -25,7 +25,7 @@ import org.junit.runner.RunWith
  */
 
 const val DEFAULT_ITERATIONS = 5
-const val TARGET_PACKAGE = "com.nexhub.homedia"
+const val TARGET_PACKAGE = "fr.nexhub.homedia"
 
 
 /**

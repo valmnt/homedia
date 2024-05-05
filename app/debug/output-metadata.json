@@ -4,7 +4,7 @@
     "type": "APK",
     "kind": "Directory"
   },
-  "applicationId": "com.nexhub.homedia",
+  "applicationId": "fr.nexhub.homedia",
   "variantName": "debug",
   "elements": [
     {

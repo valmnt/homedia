@@ -7,7 +7,7 @@ import androidx.benchmark.macro.junit4.MacrobenchmarkRule
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import androidx.test.uiautomator.By
 import androidx.test.uiautomator.Until
-import com.nexhub.utils.testing.SKIP_TAG
+import fr.nexhub.utils.testing.SKIP_TAG
 import org.junit.Rule
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -19,7 +19,7 @@ class HomeLaunchBenchmark {
 
     @Test
     fun startup() = benchmarkRule.measureRepeated(
-        packageName = "com.nexhub.homedia",
+        packageName = "fr.nexhub.homedia",
         metrics = listOf(FrameTimingMetric()),
         iterations = 1,
         startupMode = StartupMode.COLD
