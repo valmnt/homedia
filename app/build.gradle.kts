@@ -11,7 +11,7 @@ android {
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
-        namespace = "com.techlads.composetv"
+        namespace = "fr.nexhub.homedia"
         minSdk = libs.versions.minSdkTv.get().toInt()
         targetSdk = libs.versions.targetSdk.get().toInt()
         versionCode = 1

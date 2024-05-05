@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.techlads.exoplayer_compose"
+    namespace = "fr.nexhub.exoplayer_compose"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {

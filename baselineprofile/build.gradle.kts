@@ -6,7 +6,7 @@ plugins {
 }
 
 android {
-    namespace = "com.techlads.composetv.baselineprofile"
+    namespace = "fr.nexhub.homedia.baselineprofile"
     compileSdk = 34
 
     compileOptions {

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.techlads.composetv.benchmark"
+    namespace = "fr.nexhub.homedia.benchmark"
     compileSdk = 34
 
     compileOptions {

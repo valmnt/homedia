@@ -16,7 +16,7 @@ dependencyResolutionManagement {
     }
 }
  
-rootProject.name = "Compose TV"
+rootProject.name = "Homedia"
 include(":app", ":player", ":exoplayer")
 include(":benchmark")
 include(":baselineprofile")

@@ -5,7 +5,7 @@ plugins {
 }
 
 android {
-    namespace = "com.techlads.player"
+    namespace = "fr.nexhub.player"
     compileSdk = libs.versions.compileSdk.get().toInt()
 
     defaultConfig {
