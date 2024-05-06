@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import fr.nexhub.homedia.features.login.withQuickConnect.data.repository.QuickConnectRepositoryImpl
+import fr.nexhub.homedia.features.login.withQuickConnect.domain.repository.QuickConnectRepository
 import fr.nexhub.homedia.features.server.registration.data.repository.ServerRegistrationRepositoryImpl
 import fr.nexhub.homedia.features.server.registration.domain.repository.ServerRegistrationRepository
 import javax.inject.Singleton
@@ -15,4 +17,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideServerRegistrationRepository(impl: ServerRegistrationRepositoryImpl): ServerRegistrationRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideQuickConnectRepository(impl: QuickConnectRepositoryImpl): QuickConnectRepository
 }

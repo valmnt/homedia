@@ -18,4 +18,18 @@
     // Server screen
     <string name="ip_or_domain_name">IP or domain name</string>
     <string name="submit">Submit</string>
+
+    // Quick Connect screen
+    <string name="please_sign_in">Please sign in</string>
+    <string name="quick_connect_enabled_first_step">1. Open the Jellyfin app on your phone or webbrowser, and sign in with your account</string>
+    <string name="quick_connect_enabled_second_step">2. Open the user menu and go to the Quick Connect page</string>
+    <string name="quick_connect_enabled_third_step">3. Enter the following code :</string>
+    <string name="quick_connect_disabled">Quick Connect disabled</string>
+    <string name="quick_connect_disabled_first_step">1. Connect to your Jellyfin instance as administrator</string>
+    <string name="quick_connect_disabled_second_step"><![CDATA[2. Go to Settings > General > Quick Connect]]></string>
+    <string name="quick_connect_disabled_third_step">3. Check Enable Quick Connect on this server</string>
+    <string name="an_error_has_occurred_with_quick_connect">An error has occurred with Quick Connect</string>
+    <string name="quick_connect_error_first_step">1. Make sure that your Jellyfin instance is operational</string>
+    <string name="quick_connect_error_second_step">2. Ensure that your Jellyfin instance is accessible</string>
+    <string name="quick_connect_error_third_step">3. Attempt to relaunch the app</string>
 </resources>

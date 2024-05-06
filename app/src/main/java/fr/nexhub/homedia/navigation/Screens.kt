@@ -2,7 +2,7 @@ package fr.nexhub.homedia.navigation
 
 sealed class Screens(val title: String) {
     data object Login : Screens("login")
-    data object LoginToken : Screens("login_token")
+    data object QuickConnect : Screens("quick_connect")
     data object Home : Screens("home_screen")
     data object Player : Screens("player_screen")
     data object ProductDetail : Screens("product_detail")

@@ -14,7 +14,7 @@ import fr.nexhub.homedia.features.details.ProductDetailsScreen
 import fr.nexhub.homedia.features.home.HomeScreen
 import fr.nexhub.homedia.features.home.HomeViewModel
 import fr.nexhub.homedia.features.login.withEmailPassword.LoginScreen
-import fr.nexhub.homedia.features.login.withToken.DeviceTokenAuthenticationScreen
+import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
 import fr.nexhub.homedia.features.mp3.player.AudioPlayerScreen
 import fr.nexhub.homedia.features.player.PlayerScreen
 import fr.nexhub.homedia.features.server.registration.presentation.ServerRegistrationScreen
@@ -22,13 +22,13 @@ import fr.nexhub.homedia.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel) {
-    AnimatedNavHost(navController = navController, startDestination = Screens.ServerRegistration.title) {
+fun AppNavigation(navController: NavHostController, startDestination: String, homeViewModel: HomeViewModel) {
+    AnimatedNavHost(navController = navController, startDestination = startDestination) {
         composable(
             Screens.ServerRegistration.title,
         ) {
             ServerRegistrationScreen {
-                navController.navigateSingleTopTo(Screens.LoginToken.title)
+                navController.navigateSingleTopTo(Screens.QuickConnect.title)
             }
         }
 
@@ -41,12 +41,10 @@ fun AppNavigation(navController: NavHostController, homeViewModel: HomeViewModel
         }
 
         composable(
-            Screens.LoginToken.title,
+            Screens.QuickConnect.title,
         ) {
-            DeviceTokenAuthenticationScreen(onSkip = {
+            QuickConnectScreen {
                 navController.navigateSingleTopTo(Screens.Home.title)
-            }) {
-                navController.navigateSingleTopTo(it.title)
             }
         }
 

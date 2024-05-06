@@ -14,6 +14,9 @@ import fr.nexhub.homedia.features.home.HomeViewModel
 import fr.nexhub.homedia.navigation.AppNavigation
 import fr.nexhub.homedia.theme.HomediaTheme
 import dagger.hilt.android.AndroidEntryPoint
+import fr.nexhub.homedia.managers.JellyfinManager
+import fr.nexhub.homedia.managers.PreferencesManager
+import fr.nexhub.homedia.navigation.Screens
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -42,8 +45,24 @@ class MainActivity : ComponentActivity() {
 
     @Composable
     fun App(navController: NavHostController, homeViewModel: HomeViewModel) {
+        val preferencesManager = PreferencesManager(context = applicationContext)
+        val accessToken = preferencesManager.getData("ACCESS_TOKEN", "")
+        val startDestination: String
+
+        if (accessToken.isEmpty()) {
+            startDestination = Screens.ServerRegistration.title
+        } else {
+            startDestination = Screens.Home.title
+
+            JellyfinManager.initSDK(
+                currentContext = applicationContext,
+                baseUrl = preferencesManager.getData("BASE_URL", ""),
+                accessToken = accessToken
+            )
+        }
+
         HomediaTheme {
-            AppNavigation(navController, homeViewModel)
+            AppNavigation(navController, startDestination, homeViewModel)
         }
     }
 }
