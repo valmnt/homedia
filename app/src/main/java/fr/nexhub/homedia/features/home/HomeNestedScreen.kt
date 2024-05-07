@@ -7,7 +7,6 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import fr.nexhub.homedia.features.home.carousel.HomeCarousel
-import fr.nexhub.homedia.features.home.hero.HeroItem
 
 @Composable
 fun HomeNestedScreen(
@@ -20,7 +19,6 @@ fun HomeNestedScreen(
     }
 
     Column(Modifier.fillMaxSize()) {
-        HeroItem()
         HomeCarousel(Modifier.weight(1f), onItemFocus = { parent, child ->
             focusState.value = FocusPosition(parent, child)
             onItemFocus(parent, child)

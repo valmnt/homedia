@@ -36,11 +36,10 @@ import androidx.tv.material3.TabRow
 import androidx.tv.material3.TabRowScope
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
-import fr.nexhub.homedia.features.home.leftmenu.data.MenuData
-import fr.nexhub.homedia.features.home.leftmenu.model.MenuItem
-import fr.nexhub.homedia.features.home.leftmenu.model.isCircleIcon
 import fr.nexhub.homedia.features.home.navigation.NestedScreens
-import fr.nexhub.homedia.features.settings.screens.profile.ProfilePicture
+import fr.nexhub.homedia.features.home.navigation.data.MenuData
+import fr.nexhub.homedia.features.home.navigation.model.MenuItem
+import fr.nexhub.homedia.features.home.navigation.model.isCircleIcon
 
 @Composable
 fun HomeTopBar(
@@ -66,11 +65,6 @@ fun HomeTopBar(
                         .background(Color.Transparent)
                 )
             }) {
-                NavigationTabItem(item = MenuData.settingsItem,
-                    isSelected = selectedId == MenuData.settingsItem.id,
-                    onMenuSelected = {
-                        onMenuSelected?.invoke(MenuData.settingsItem)
-                    })
                 MenuData.menuItems.forEachIndexed { index, menuItem ->
                     if (menuItem.id != NestedScreens.Search.title) {
                         NavigationTabItem(item = menuItem,
@@ -78,7 +72,8 @@ fun HomeTopBar(
                             onMenuSelected = {
                                 selectedTabIndex = index
                                 onMenuSelected?.invoke(it)
-                            })
+                            }
+                        )
                     }
                 }
                 NavigationTabItem(
@@ -86,7 +81,15 @@ fun HomeTopBar(
                     isSelected = selectedId == searchItem.id,
                     onMenuSelected = {
                         onMenuSelected?.invoke(searchItem)
-                    })
+                    }
+                )
+
+                NavigationTabItem(item = MenuData.settingsItem,
+                    isSelected = selectedId == MenuData.settingsItem.id,
+                    onMenuSelected = {
+                        onMenuSelected?.invoke(MenuData.settingsItem)
+                    }
+                )
             }
             Text(
                 text = stringResource(id = R.string.app_name),
@@ -132,32 +135,37 @@ fun TabRowScope.NavigationTabItem(
                     isSelected -> MaterialTheme.colorScheme.surfaceVariant.copy(
                         alpha = 0.5f
                     )
+
                     else -> Color.Transparent
                 }, if (item.isCircleIcon()) CircleShape else MaterialTheme.shapes.extraLarge
             )
     ) {
         when (item.id) {
-            NestedScreens.Search.title -> Box(
-                modifier = Modifier.size(36.dp),
-                contentAlignment = Alignment.Center
-            ) {
-                item.icon?.let { icon ->
-                    Icon(
-                        modifier = Modifier.size(24.dp),
-                        imageVector = icon,
-                        contentDescription = item.text,
-                    )
-                }
-            }
-
-            NestedScreens.Settings.title -> Box(modifier = Modifier.size(36.dp)) {
-                ProfilePicture()
-            }
-
-            else -> Text(
-                item.text, modifier = Modifier.padding(horizontal = 16.dp, vertical = 8.dp)
-            )
+            NestedScreens.Search.title -> MenuItem(item = item)
+            NestedScreens.Settings.title -> MenuItem(item = item)
+            else -> MenuItem(item = item)
         }
+    }
+}
+
+@Composable
+fun MenuItem(item: MenuItem) {
+    Row {
+        Box(
+            modifier = Modifier.size(36.dp),
+            contentAlignment = Alignment.Center
+        ) {
+            item.icon?.let { icon ->
+                Icon(
+                    modifier = Modifier.size(24.dp),
+                    imageVector = icon,
+                    contentDescription = item.text,
+                )
+            }
+        }
+        Text(
+            item.text, modifier = Modifier.padding(top = 8.dp, start = 8.dp, end = 16.dp)
+        )
     }
 }
 

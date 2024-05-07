@@ -1,10 +1,7 @@
 package fr.nexhub.homedia.features.home.navigation
 
 sealed class NestedScreens(val title: String) {
-    object Home : NestedScreens("home")
-    object Search : NestedScreens("search")
-    object Movies : NestedScreens("movies")
-    object Songs : NestedScreens("songs")
-    object Favorites : NestedScreens("favourites")
-    object Settings : NestedScreens("settings")
+    data object Home : NestedScreens("home")
+    data object Search : NestedScreens("search")
+    data object Settings : NestedScreens("settings")
 }

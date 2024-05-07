@@ -12,7 +12,6 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import fr.nexhub.homedia.features.details.ProductDetailsScreen
 import fr.nexhub.homedia.features.home.HomeScreen
-import fr.nexhub.homedia.features.home.HomeViewModel
 import fr.nexhub.homedia.features.login.withEmailPassword.LoginScreen
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
 import fr.nexhub.homedia.features.mp3.player.AudioPlayerScreen
@@ -22,7 +21,7 @@ import fr.nexhub.homedia.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun AppNavigation(navController: NavHostController, startDestination: String, homeViewModel: HomeViewModel) {
+fun AppNavigation(navController: NavHostController, startDestination: String) {
     AnimatedNavHost(navController = navController, startDestination = startDestination) {
         composable(
             Screens.ServerRegistration.title,
@@ -64,10 +63,8 @@ fun AppNavigation(navController: NavHostController, startDestination: String, ho
 
         composable(
             Screens.Home.title,) {
-            HomeScreen(homeViewModel, { _, _ ->
+            HomeScreen { _, _ ->
                 navController.navigate(Screens.ProductDetail.title)
-            }) {
-                navController.navigate(Screens.Mp3Player.title)
             }
         }
 
