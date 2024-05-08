@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.home.carousel
+package fr.nexhub.homedia.features.home.presentation.components.carousel
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
@@ -9,7 +9,6 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -20,28 +19,23 @@ import fr.nexhub.homedia.widgets.BorderedFocusableItem
 import fr.nexhub.utils.testing.tagForItem
 
 @Composable
-fun CarouselItem(
+fun CarouselLibraryItem(
     modifier: Modifier = Modifier,
+    text: String,
     parent: Int,
     child: Int,
-    onItemFocus: (parent: Int, child: Int) -> Unit,
-    onItemClick: (parent: Int, child: Int) -> Unit,
+    onItemClick: (HorizontalRowType, List<String>) -> Unit,
 ) {
     BorderedFocusableItem(
-        onClick = { onItemClick(parent, child) },
+        onClick = { onItemClick(HorizontalRowType.LIBRARIES, listOf(text)) },
         borderRadius = 12.dp,
         modifier = modifier
             .testTag(tagForItem(parent, child))
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
-            .onFocusChanged {
-                if (it.isFocused) {
-                    onItemFocus(parent, child)
-                }
-            },
     ) {
         Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
+            Text(text = text, textAlign = TextAlign.Center)
         }
     }
 }
@@ -64,8 +58,8 @@ fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, chi
 
 @Preview
 @Composable
-fun CarouselItemPrev() {
-    CarouselItem(Modifier,1, 1, onItemClick = { _, _ -> }, onItemFocus = { _, _ -> })
+fun CarouselLibraryItemPrev() {
+    CarouselLibraryItem(Modifier,"Text", 1, 1) { _, _ ->}
 }
 
 @Preview

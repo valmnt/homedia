@@ -4,6 +4,8 @@ import dagger.Binds
 import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import fr.nexhub.homedia.features.home.data.repository.LibraryRepositoryImpl
+import fr.nexhub.homedia.features.home.domain.repository.LibraryRepository
 import fr.nexhub.homedia.features.login.withQuickConnect.data.repository.QuickConnectRepositoryImpl
 import fr.nexhub.homedia.features.login.withQuickConnect.domain.repository.QuickConnectRepository
 import fr.nexhub.homedia.features.server.registration.data.repository.ServerRegistrationRepositoryImpl
@@ -21,4 +23,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideQuickConnectRepository(impl: QuickConnectRepositoryImpl): QuickConnectRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideLibraryRepository(impl: LibraryRepositoryImpl): LibraryRepository
 }

@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.home
+package fr.nexhub.homedia.features.home.presentation
 
 import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.runtime.Composable
@@ -7,15 +7,17 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
-import fr.nexhub.homedia.features.home.navigation.NestedHomeNavigation
-import fr.nexhub.homedia.features.home.navigation.data.MenuData
-import fr.nexhub.homedia.features.home.navigation.topbar.HomeTopBar
+import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
+import fr.nexhub.homedia.features.home.presentation.components.navigation.NestedHomeNavigation
+import fr.nexhub.homedia.features.home.presentation.components.navigation.data.MenuData
+import fr.nexhub.homedia.features.home.presentation.components.navigation.topbar.HomeTopBar
 import fr.nexhub.homedia.theme.HomediaTheme
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeScreenContent(
-    onItemFocus: (parent: Int, child: Int) -> Unit,
+    state: HomeViewState,
+    onItemClick: (HorizontalRowType, List<String>) -> Unit
 ) {
     val navController = rememberAnimatedNavController()
 
@@ -30,7 +32,7 @@ fun HomeScreenContent(
     }
 
     HomeTopBar(content = {
-        NestedHomeNavigation(navController, onItemFocus)
+        NestedHomeNavigation(navController, state, onItemClick)
     }, selectedId = selectedId.value) {
         navController.navigate(it.id)
     }
@@ -40,6 +42,6 @@ fun HomeScreenContent(
 @Composable
 fun HomeScreenContentPrev() {
     HomediaTheme {
-        HomeScreenContent(onItemFocus = { _, _ -> })
+        HomeScreenContent(HomeViewState()) { _, _ -> }
     }
 }

@@ -33,7 +33,7 @@ class ServerRegistrationViewModel @Inject constructor(
                 _state.update {
                     it.copy(isLoading = false)
                 }
-                JellyfinManager.initSDK(context, baseUrl, accessToken = null)
+                JellyfinManager.initSDK(context, baseUrl, accessToken = null, userId = null)
                 onSuccess()
                 Timber.tag("GET_PING_RESP").d(baseUrl)
             }

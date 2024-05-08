@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.home.navigation.topbar
+package fr.nexhub.homedia.features.home.presentation.components.navigation.topbar
 
 import androidx.compose.foundation.background
 import androidx.compose.foundation.interaction.MutableInteractionSource
@@ -36,10 +36,10 @@ import androidx.tv.material3.TabRow
 import androidx.tv.material3.TabRowScope
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
-import fr.nexhub.homedia.features.home.navigation.NestedScreens
-import fr.nexhub.homedia.features.home.navigation.data.MenuData
-import fr.nexhub.homedia.features.home.navigation.model.MenuItem
-import fr.nexhub.homedia.features.home.navigation.model.isCircleIcon
+import fr.nexhub.homedia.features.home.presentation.components.navigation.NestedScreens
+import fr.nexhub.homedia.features.home.presentation.components.navigation.data.MenuData
+import fr.nexhub.homedia.features.home.presentation.components.navigation.model.MenuItem
+import fr.nexhub.homedia.features.home.presentation.components.navigation.model.isCircleIcon
 
 @Composable
 fun HomeTopBar(

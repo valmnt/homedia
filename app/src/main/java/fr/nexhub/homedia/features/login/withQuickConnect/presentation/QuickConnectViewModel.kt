@@ -60,6 +60,7 @@ class QuickConnectViewModel @Inject constructor(
                     secret = secret
                 )
                 storeAccessToken(authenticationResult = authenticationResult)
+                storeUserId(authenticationResult = authenticationResult)
                 storeBaseUrl()
                 val mainScope = CoroutineScope(Dispatchers.Main)
                 mainScope.launch {
@@ -74,6 +75,13 @@ class QuickConnectViewModel @Inject constructor(
         JellyfinManager.api.accessToken = authenticationResult.accessToken
         authenticationResult.accessToken?.let {
             preferencesManager.saveData("ACCESS_TOKEN", it)
+        }
+    }
+
+    private fun storeUserId(authenticationResult: AuthenticationResult) {
+        JellyfinManager.api.userId = authenticationResult.user?.id
+        authenticationResult.user?.id.let {
+            preferencesManager.saveData("USER_ID", it.toString())
         }
     }
 

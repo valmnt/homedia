@@ -10,14 +10,11 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import fr.nexhub.homedia.features.details.ProductDetailsScreen
-import fr.nexhub.homedia.features.home.HomeScreen
-import fr.nexhub.homedia.features.login.withEmailPassword.LoginScreen
+import fr.nexhub.homedia.features.home.presentation.HomeScreen
+import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
-import fr.nexhub.homedia.features.mp3.player.AudioPlayerScreen
-import fr.nexhub.homedia.features.player.PlayerScreen
+import fr.nexhub.homedia.features.media.MediaScreen
 import fr.nexhub.homedia.features.server.registration.presentation.ServerRegistrationScreen
-import fr.nexhub.homedia.features.wiw.WhoIsWatchingScreen
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -32,14 +29,6 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         }
 
         composable(
-            Screens.Login.title,
-        ) {
-            LoginScreen {
-                navController.navigateSingleTopTo(Screens.WhoIsWatching.title)
-            }
-        }
-
-        composable(
             Screens.QuickConnect.title,
         ) {
             QuickConnectScreen {
@@ -48,48 +37,22 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         }
 
         composable(
-            Screens.WhoIsWatching.title,
+            Screens.Home.title
         ) {
-            WhoIsWatchingScreen {
-                navController.navigateSingleTopTo(Screens.Home.title)
-            }
-        }
-        composable(
-            Screens.Mp3Player.title,) {
-            AudioPlayerScreen {
-                navController.navigateUp()
-            }
-        }
-
-        composable(
-            Screens.Home.title,) {
-            HomeScreen { _, _ ->
-                navController.navigate(Screens.ProductDetail.title)
+            HomeScreen { horizontalRowType, args ->
+                when(horizontalRowType) {
+                    HorizontalRowType.LIBRARIES -> {
+                        navController.navigate("${Screens.Media.title}/${args.first()}")
+                    }
+                }
             }
         }
 
         composable(
-            Screens.Player.title,
-        ) {
-            PlayerScreen(
-                "https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4",
-                onBackPressed = {
-                    navController.navigateUp()
-                },
-            )
-        }
-
-        composable(
-            Screens.ProductDetail.title,
-        ) {
-            ProductDetailsScreen(
-                onBackPressed = {
-                    navController.navigateUp()
-                },
-                onPlayClick = {
-                    navController.navigate(Screens.Player.title)
-                },
-            )
+            "${Screens.Media.title}/{title}"
+        ) {navBackStackEntry ->
+            val title = navBackStackEntry.arguments?.getString("title")
+            MediaScreen(title ?: "Media") { _, _ -> }
         }
     }
 }

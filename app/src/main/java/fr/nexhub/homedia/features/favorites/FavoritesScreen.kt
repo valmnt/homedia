@@ -14,7 +14,7 @@ import androidx.tv.foundation.lazy.grid.TvGridItemSpan
 import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
-import fr.nexhub.homedia.features.home.carousel.VerticalCarouselItem
+import fr.nexhub.homedia.features.home.presentation.components.carousel.VerticalCarouselItem
 
 @Composable
 fun FavoritesScreen() {
@@ -40,6 +40,7 @@ fun FavoritesGrid(modifier: Modifier) {
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun GridHeader() {
     Text(

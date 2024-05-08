@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.movies
+package fr.nexhub.homedia.features.media
 
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
@@ -14,15 +14,15 @@ import androidx.tv.foundation.lazy.grid.TvGridItemSpan
 import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
-import fr.nexhub.homedia.features.home.carousel.VerticalCarouselItem
+import fr.nexhub.homedia.features.home.presentation.components.carousel.VerticalCarouselItem
 
 @Composable
-fun MoviesScreen(onItemFocus: (parent: Int, child: Int) -> Unit) {
-    MoviesGrid(Modifier, onItemFocus)
+fun MediaScreen(title: String, onItemFocus: (parent: Int, child: Int) -> Unit) {
+    MediaGrid(Modifier, title, onItemFocus)
 }
 
 @Composable
-fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Unit) {
+fun MediaGrid(modifier: Modifier, title: String, onItemFocus: (parent: Int, child: Int) -> Unit) {
     TvLazyVerticalGrid(
         modifier = modifier,
         columns = TvGridCells.Fixed(5),
@@ -31,7 +31,7 @@ fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Uni
         item(span = {
             TvGridItemSpan(5)
         }) {
-            GridHeader()
+            GridHeader(title)
         }
         items(30) {
             VerticalCarouselItem(parent = 0, child = 0, onItemFocus)
@@ -40,9 +40,9 @@ fun MoviesGrid(modifier: Modifier, onItemFocus: (parent: Int, child: Int) -> Uni
 }
 
 @Composable
-fun GridHeader() {
+fun GridHeader(title: String) {
     Text(
-        text = "Movies",
+        text = title,
         style = MaterialTheme.typography.titleLarge,
         modifier = Modifier.padding(bottom = 24.dp, start = 8.dp),
     )
@@ -50,6 +50,6 @@ fun GridHeader() {
 
 @Preview(device = "id:tv_1080p")
 @Composable
-fun MoviesScreenPrev() {
-    MoviesScreen { _, _ -> }
+fun MediaScreenPrev() {
+    MediaScreen("Media") { _, _ -> }
 }

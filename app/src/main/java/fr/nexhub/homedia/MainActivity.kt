@@ -15,6 +15,7 @@ import fr.nexhub.homedia.managers.PreferencesManager
 import fr.nexhub.homedia.navigation.AppNavigation
 import fr.nexhub.homedia.navigation.Screens
 import fr.nexhub.homedia.theme.HomediaTheme
+import java.util.UUID
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
@@ -55,6 +56,7 @@ class MainActivity : ComponentActivity() {
             JellyfinManager.initSDK(
                 currentContext = applicationContext,
                 baseUrl = preferencesManager.getData("BASE_URL", ""),
+                userId = UUID.fromString(preferencesManager.getData("USER_ID", "")),
                 accessToken = accessToken
             )
         }

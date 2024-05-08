@@ -10,8 +10,10 @@ import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT
 import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onPreviewKeyEvent
+import fr.nexhub.homedia.features.home.domain.model.Library
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import org.jellyfin.sdk.model.api.BaseItemDto
 
 fun <T> StateFlow<T>.toMutable() = this as MutableStateFlow
 
@@ -66,4 +68,13 @@ fun Modifier.handleDPadKeyEvents(
         }
     }
     false
+}
+
+fun  List<BaseItemDto>.toLibraries(): List<Library> {
+    return this.map {
+        Library(
+            id = it.id,
+            title = it.name ?: "Unknown"
+        )
+    }
 }

@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.home.carousel
+package fr.nexhub.homedia.features.home.presentation.components.carousel
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
@@ -8,20 +8,18 @@ import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.tv.foundation.lazy.list.TvLazyListScope
 import androidx.tv.foundation.lazy.list.TvLazyRow
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 
 @Composable
 fun HorizontalCarouselItem(
-    parent: Int,
-    onItemFocus: (child: Int, parent: Int) -> Unit,
-    onItemClick: (child: Int, parent: Int) -> Unit,
-) {
+    text: String,
+    content:  TvLazyListScope.() -> Unit) {
     Column(Modifier.height(150.dp)) {
-        Text(text = "Row $parent", modifier = Modifier.padding(horizontal = 24.dp))
+        Text(text = text, modifier = Modifier.padding(horizontal = 24.dp))
         TvLazyRow(
             contentPadding = PaddingValues(
                 start = 16.dp,
@@ -29,26 +27,7 @@ fun HorizontalCarouselItem(
                 bottom = 8.dp,
                 end = 100.dp,
             ),
-        ) {
-            items(15) { child ->
-                CarouselItem(
-                    Modifier,
-                    parent,
-                    child,
-                    onItemClick = onItemClick,
-                    onItemFocus = onItemFocus,
-                )
-            }
-        }
+            content = content
+        )
     }
-}
-
-@Preview
-@Composable
-fun HorizontalCarouselItemPrev() {
-    HorizontalCarouselItem(
-        1,
-        onItemFocus = { _, _ -> },
-        onItemClick = { _, _ -> },
-    )
 }
