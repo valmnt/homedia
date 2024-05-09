@@ -10,6 +10,7 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
+import fr.nexhub.homedia.features.details.ProductDetailsScreen
 import fr.nexhub.homedia.features.home.presentation.HomeScreen
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
@@ -44,6 +45,9 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
                     HorizontalRowType.LIBRARIES -> {
                         navController.navigate("${Screens.Media.title}/${args.first()}")
                     }
+                    HorizontalRowType.RECENT_ITEMS -> {
+                        navController.navigate(Screens.Details.title)
+                    }
                 }
             }
         }
@@ -53,6 +57,12 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         ) {navBackStackEntry ->
             val title = navBackStackEntry.arguments?.getString("title")
             MediaScreen(title ?: "Media") { _, _ -> }
+        }
+
+        composable(
+            Screens.Details.title
+        ) {
+           ProductDetailsScreen() {}
         }
     }
 }

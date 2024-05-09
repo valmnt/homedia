@@ -35,4 +35,5 @@
 
     // Home
     <string name="libraries">Libraries</string>
+    <string name="recently_added_in">Recently added in</string>
 </resources>

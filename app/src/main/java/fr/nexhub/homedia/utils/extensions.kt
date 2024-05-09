@@ -1,5 +1,7 @@
 package fr.nexhub.homedia.utils
 
+import android.graphics.Bitmap
+import android.graphics.BitmapFactory
 import android.view.KeyEvent
 import android.view.KeyEvent.KEYCODE_DPAD_CENTER
 import android.view.KeyEvent.KEYCODE_DPAD_LEFT
@@ -11,8 +13,13 @@ import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onPreviewKeyEvent
 import fr.nexhub.homedia.features.home.domain.model.Library
+import fr.nexhub.homedia.features.home.domain.model.RecentItem
+import io.ktor.utils.io.ByteReadChannel
+import io.ktor.utils.io.core.readBytes
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
+import kotlinx.coroutines.withContext
 import org.jellyfin.sdk.model.api.BaseItemDto
 
 fun <T> StateFlow<T>.toMutable() = this as MutableStateFlow
@@ -70,11 +77,27 @@ fun Modifier.handleDPadKeyEvents(
     false
 }
 
-fun  List<BaseItemDto>.toLibraries(): List<Library> {
-    return this.map {
-        Library(
-            id = it.id,
-            title = it.name ?: "Unknown"
-        )
+suspend fun ByteReadChannel.byteReadChannelToBitmap(): Bitmap? {
+    val limit: Long = 1024 * 1024
+    val headerSizeHint = 1024
+    val byteArray = withContext(Dispatchers.IO) {
+        this@byteReadChannelToBitmap.readRemaining(limit, headerSizeHint).readBytes()
     }
+    return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
+}
+
+fun  BaseItemDto.toLibrary(recentItems: List<RecentItem>): Library {
+    return Library(
+        id = this.id,
+        title = this.name ?: "Unknown",
+        recentItems = recentItems
+    )
+}
+
+fun  BaseItemDto.toRecentItem(image: Bitmap?): RecentItem {
+    return RecentItem(
+        id = this.id,
+        image = image,
+        title = this.name ?: "Unknown"
+    )
 }

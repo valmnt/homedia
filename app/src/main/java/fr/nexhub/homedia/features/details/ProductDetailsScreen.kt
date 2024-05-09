@@ -2,7 +2,6 @@
 
 package fr.nexhub.homedia.features.details
 
-import androidx.activity.compose.BackHandler
 import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
@@ -48,14 +47,12 @@ import kotlinx.coroutines.delay
 const val ANIMATION_DELAY = 600L
 
 @Composable
-fun ProductDetailsScreen(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
-    ProductDetailsContent(onBackPressed, onPlayClick = onPlayClick)
+fun ProductDetailsScreen(onPlayClick: () -> Unit) {
+    ProductDetailsContent(onPlayClick = onPlayClick)
 }
 
 @Composable
-private fun ProductDetailsContent(onBackPressed: () -> Unit, onPlayClick: () -> Unit) {
-    BackHandler(onBack = onBackPressed)
-
+private fun ProductDetailsContent(onPlayClick: () -> Unit) {
     val isLoaded = remember {
         mutableStateOf(false)
     }
@@ -256,6 +253,6 @@ fun Rating(rating: String) {
 @Composable
 fun DetailsScreenPrev() {
     HomediaTheme {
-        ProductDetailsScreen(onPlayClick = {}, onBackPressed = {})
+        ProductDetailsScreen(onPlayClick = {})
     }
 }

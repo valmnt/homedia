@@ -4,6 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import fr.nexhub.homedia.features.home.domain.repository.LibraryRepository
+import fr.nexhub.homedia.features.home.domain.repository.RecentItemRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -13,7 +14,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class HomeViewModel @Inject constructor(
-    private val libraryRepository: LibraryRepository
+    private val libraryRepository: LibraryRepository,
+    private val recentItemRepository: RecentItemRepository
 ): ViewModel() {
 
     private val _state = MutableStateFlow(HomeViewState())
@@ -30,7 +32,9 @@ class HomeViewModel @Inject constructor(
                 _state.update {
                     it.copy(libraries = libraries)
                 }
-                libraries.map { Timber.tag("GET_LIBRARIES").d(it.title) }
+                libraries.forEach { library ->
+                    Timber.tag("GET_LIBRARIES").d(library.title)
+                }
             }
             .onLeft { error ->
                 Timber.tag("GET_LIBRARIES_ERROR").d(error.t?.message ?: "")

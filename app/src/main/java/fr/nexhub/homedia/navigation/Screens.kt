@@ -5,4 +5,5 @@ sealed class Screens(val title: String) {
     data object QuickConnect : Screens("quick_connect")
     data object Home : Screens("home_screen")
     data object Media: Screens("media")
+    data object Details: Screens("details")
 }

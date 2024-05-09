@@ -2,6 +2,8 @@ package fr.nexhub.homedia.features.home.presentation.components.carousel
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.testTag
@@ -23,22 +25,44 @@ fun HomeCarousel(
         modifier.testTag(SECTIONS_LIST_TAG),
         contentPadding = PaddingValues(bottom = 100.dp)
     ) {
-        items(HorizontalRowType.entries.size) { parent ->
-            when(HorizontalRowType.entries[parent]) {
-                HorizontalRowType.LIBRARIES -> LibrariesRow(state, parent, onItemClick)
+        items(1) { parent ->
+            RowForLibraries(state, parent, onItemClick)
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+        items(state.libraries.size) { parent ->
+            RowForRecentItemsInLibrary(state, parent, onItemClick)
+            Spacer(modifier = Modifier.height(20.dp))
+        }
+    }
+}
+
+@Composable
+fun RowForLibraries(state: HomeViewState, parent: Int, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
+    if (state.libraries.isNotEmpty()) {
+        HorizontalCarouselItem(text = stringResource(R.string.libraries)) {
+            items(state.libraries.size) { child ->
+                CarouselForLibraries(
+                    modifier = Modifier,
+                    text = state.libraries[child].title,
+                    parent = parent,
+                    onItemClick = onItemClick,
+                    child = child,
+                )
             }
         }
     }
 }
 
 @Composable
-fun LibrariesRow(state: HomeViewState, parent: Int, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
-    if (state.libraries.isNotEmpty()) {
-        HorizontalCarouselItem(text = stringResource(R.string.libraries)) {
-            items(state.libraries.count()) { child ->
-                CarouselLibraryItem(
+fun RowForRecentItemsInLibrary(state: HomeViewState, parent: Int, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
+    val recentItems = state.libraries[parent].recentItems
+    if (recentItems != null) {
+        HorizontalCarouselItem(text = "${stringResource(R.string.recently_added_in)} ${state.libraries[parent].title}") {
+            items(recentItems.size) { child ->
+                CarouselForRecentItemsInLibrary(
                     modifier = Modifier,
-                    text = state.libraries[child].title,
+                    text = recentItems[child].title,
+                    bitmap = recentItems[child].image,
                     parent = parent,
                     child = child,
                     onItemClick = onItemClick,
