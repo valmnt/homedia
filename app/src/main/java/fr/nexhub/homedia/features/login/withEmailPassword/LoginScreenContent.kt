@@ -26,7 +26,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.theme.HomediaTheme
-import fr.nexhub.homedia.widgets.TvButton
+import fr.nexhub.homedia.features.common.components.TvButton
 
 @Composable
 fun LoginPage(

@@ -14,7 +14,7 @@ import fr.nexhub.homedia.features.home.presentation.components.navigation.Nested
 import fr.nexhub.homedia.features.home.presentation.components.navigation.data.MenuData
 import fr.nexhub.homedia.features.home.presentation.components.navigation.topbar.HomeTopBar
 import fr.nexhub.homedia.theme.HomediaTheme
-import fr.nexhub.homedia.widgets.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

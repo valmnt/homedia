@@ -26,7 +26,7 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
 import fr.nexhub.homedia.features.server_registration.presentation.components.IPorDomainTextField
-import fr.nexhub.homedia.widgets.TvButton
+import fr.nexhub.homedia.features.common.components.TvButton
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable

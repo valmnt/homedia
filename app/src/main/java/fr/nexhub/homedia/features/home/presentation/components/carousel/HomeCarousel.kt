@@ -41,7 +41,7 @@ fun RowForLibraries(state: HomeViewState, parent: Int, onItemClick: (HorizontalR
     if (state.libraries.isNotEmpty()) {
         HorizontalCarouselItem(text = stringResource(R.string.libraries)) {
             items(state.libraries.size) { child ->
-                CarouselForLibraries(
+                CardCarouselForLibrary(
                     modifier = Modifier,
                     id = state.libraries[child].id,
                     text = state.libraries[child].title,
@@ -60,7 +60,7 @@ fun RowForRecentItemsInLibrary(state: HomeViewState, parent: Int, onItemClick: (
     if (recentItems != null) {
         HorizontalCarouselItem(text = "${stringResource(R.string.recently_added_in)} ${state.libraries[parent].title}") {
             items(recentItems.size) { child ->
-                CarouselForRecentItemsInLibrary(
+                CardCarouselForRecentItemInLibrary(
                     modifier = Modifier,
                     text = recentItems[child].title,
                     bitmap = recentItems[child].image,

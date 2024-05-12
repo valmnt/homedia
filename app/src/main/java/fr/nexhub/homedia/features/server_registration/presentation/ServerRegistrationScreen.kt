@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import fr.nexhub.homedia.widgets.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
 
 @Composable
 fun ServerRegistrationScreen(modifier: Modifier = Modifier, goToScreen: () -> Unit) {

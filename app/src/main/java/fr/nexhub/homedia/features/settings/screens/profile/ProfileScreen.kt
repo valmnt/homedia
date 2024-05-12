@@ -26,7 +26,7 @@ import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
 import fr.nexhub.homedia.features.settings.data.SettingsMenuModel
 import fr.nexhub.homedia.features.settings.screens.PreferencesContainer
-import fr.nexhub.homedia.widgets.TvButton
+import fr.nexhub.homedia.features.common.components.TvButton
 
 @Composable
 fun ProfileScreen() {

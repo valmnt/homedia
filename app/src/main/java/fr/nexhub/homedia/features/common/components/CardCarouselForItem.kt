@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.common.presentation
+package fr.nexhub.homedia.features.common.components
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image
@@ -16,11 +16,10 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
-import fr.nexhub.homedia.widgets.BorderedFocusableItem
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun CarouselForItems(bitmap: Bitmap?, text: String, onItemFocus: () -> Unit) {
+fun CardCarouselForItem(bitmap: Bitmap?, text: String, onItemFocus: () -> Unit) {
     BorderedFocusableItem(
         onClick = {
             onItemFocus()

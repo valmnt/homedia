@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.widgets
+package fr.nexhub.homedia.features.common.components
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.CircularProgressIndicator

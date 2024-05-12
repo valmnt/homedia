@@ -39,8 +39,8 @@ import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
 import fr.nexhub.homedia.theme.HomediaTheme
-import fr.nexhub.homedia.widgets.ThumbnailImageCard
-import fr.nexhub.homedia.widgets.TvButton
+import fr.nexhub.homedia.features.common.components.ThumbnailImageCard
+import fr.nexhub.homedia.features.common.components.TvButton
 import fr.nexhub.utils.testing.PRODUCT_DETAIL_BANNER_TAG
 import kotlinx.coroutines.delay
 

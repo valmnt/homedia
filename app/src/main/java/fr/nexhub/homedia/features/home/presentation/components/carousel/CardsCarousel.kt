@@ -17,17 +17,16 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
-import fr.nexhub.homedia.widgets.BorderedFocusableItem
+import fr.nexhub.homedia.features.common.components.BorderedFocusableItem
 import fr.nexhub.utils.testing.tagForItem
 import java.util.UUID
 
 @Composable
-fun CarouselForLibraries(
+fun CardCarouselForLibrary(
     modifier: Modifier = Modifier,
     id: UUID,
     text: String,
@@ -50,7 +49,7 @@ fun CarouselForLibraries(
 }
 
 @Composable
-fun CarouselForRecentItemsInLibrary(
+fun CardCarouselForRecentItemInLibrary(
     modifier: Modifier = Modifier,
     text: String,
     bitmap: Bitmap?,
@@ -86,10 +85,4 @@ fun CarouselForRecentItemsInLibrary(
             }
         }
     }
-}
-
-@Preview
-@Composable
-fun CarouselForLibrariesPrev() {
-    CarouselForLibraries(Modifier,UUID.randomUUID(), "Text", 1, 1) { _, _ ->}
 }
