@@ -5,9 +5,9 @@ import dagger.Module
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import fr.nexhub.homedia.features.home.data.repository.LibraryRepositoryImpl
-import fr.nexhub.homedia.common.data.repository.ItemRepositoryImpl
+import fr.nexhub.homedia.features.common.data.repository.ItemRepositoryImpl
 import fr.nexhub.homedia.features.home.domain.repository.LibraryRepository
-import fr.nexhub.homedia.common.domain.repository.ItemRepository
+import fr.nexhub.homedia.features.common.domain.repository.ItemRepository
 import fr.nexhub.homedia.features.login.withQuickConnect.data.repository.QuickConnectRepositoryImpl
 import fr.nexhub.homedia.features.login.withQuickConnect.domain.repository.QuickConnectRepository
 import fr.nexhub.homedia.features.server.registration.data.repository.ServerRegistrationRepositoryImpl

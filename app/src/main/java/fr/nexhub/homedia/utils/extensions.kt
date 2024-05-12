@@ -12,7 +12,7 @@ import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT
 import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onPreviewKeyEvent
-import fr.nexhub.homedia.common.domain.model.Item
+import fr.nexhub.homedia.features.common.domain.model.Item
 import fr.nexhub.homedia.features.home.domain.model.Library
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.readBytes

@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.common.presentation
+package fr.nexhub.homedia.features.common.presentation
 
 import android.graphics.Bitmap
 import androidx.compose.foundation.Image

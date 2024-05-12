@@ -1,10 +1,10 @@
-package fr.nexhub.homedia.common.data.repository
+package fr.nexhub.homedia.features.common.data.repository
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import fr.nexhub.homedia.common.domain.model.Item
-import fr.nexhub.homedia.common.domain.repository.ItemRepository
+import fr.nexhub.homedia.features.common.domain.model.Item
+import fr.nexhub.homedia.features.common.domain.repository.ItemRepository
 import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.network.error.NetworkError
 import fr.nexhub.homedia.network.toGeneralError

@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.common.domain.model
+package fr.nexhub.homedia.features.common.domain.model
 
 import android.graphics.Bitmap
 import java.util.UUID

@@ -7,7 +7,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.foundation.lazy.grid.TvGridCells
 import androidx.tv.foundation.lazy.grid.TvGridItemSpan
 import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
-import fr.nexhub.homedia.common.presentation.CarouselForItems
+import fr.nexhub.homedia.features.common.presentation.CarouselForItems
 import fr.nexhub.homedia.features.item_list.components.GridHeader
 
 @Composable

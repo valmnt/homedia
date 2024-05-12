@@ -3,7 +3,7 @@ package fr.nexhub.homedia.features.item_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.nexhub.homedia.common.domain.repository.ItemRepository
+import fr.nexhub.homedia.features.common.domain.repository.ItemRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
