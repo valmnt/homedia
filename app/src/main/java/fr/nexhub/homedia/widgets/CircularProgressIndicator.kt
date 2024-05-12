@@ -1,6 +1,5 @@
 package fr.nexhub.homedia.widgets
 
-import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.runtime.Composable
@@ -13,8 +12,7 @@ import androidx.tv.material3.MaterialTheme
 @OptIn(ExperimentalTvMaterial3Api::class)
 fun CircularProgressIndicator(modifier: Modifier) {
     Box(
-        modifier = modifier
-            .background(color = MaterialTheme.colorScheme.background),
+        modifier = modifier,
         contentAlignment = Alignment.Center
     ) {
         CircularProgressIndicator(color = MaterialTheme.colorScheme.primary)

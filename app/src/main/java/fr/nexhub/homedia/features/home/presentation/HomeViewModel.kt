@@ -30,7 +30,7 @@ class HomeViewModel @Inject constructor(
             libraryRepository.getLibraries()
             .onRight { libraries ->
                 _state.update {
-                    it.copy(libraries = libraries)
+                    it.copy(libraries = libraries, isLoading = false)
                 }
                 libraries.forEach { library ->
                     Timber.tag("GET_LIBRARIES").d(library.title)
