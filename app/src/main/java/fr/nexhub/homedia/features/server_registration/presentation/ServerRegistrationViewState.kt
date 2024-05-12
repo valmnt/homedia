@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.server.registration.presentation
+package fr.nexhub.homedia.features.server_registration.presentation
 
 import androidx.compose.ui.text.input.TextFieldValue
 import fr.nexhub.homedia.network.error.NetworkError

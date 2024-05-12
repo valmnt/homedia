@@ -10,8 +10,8 @@ import fr.nexhub.homedia.features.home.domain.repository.LibraryRepository
 import fr.nexhub.homedia.features.common.domain.repository.ItemRepository
 import fr.nexhub.homedia.features.login.withQuickConnect.data.repository.QuickConnectRepositoryImpl
 import fr.nexhub.homedia.features.login.withQuickConnect.domain.repository.QuickConnectRepository
-import fr.nexhub.homedia.features.server.registration.data.repository.ServerRegistrationRepositoryImpl
-import fr.nexhub.homedia.features.server.registration.domain.repository.ServerRegistrationRepository
+import fr.nexhub.homedia.features.server_registration.data.repository.ServerRegistrationRepositoryImpl
+import fr.nexhub.homedia.features.server_registration.domain.repository.ServerRegistrationRepository
 import javax.inject.Singleton
 
 @Module

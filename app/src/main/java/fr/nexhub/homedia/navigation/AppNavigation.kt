@@ -15,7 +15,7 @@ import fr.nexhub.homedia.features.home.presentation.HomeScreen
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
 import fr.nexhub.homedia.features.item_list.ItemListScreen
-import fr.nexhub.homedia.features.server.registration.presentation.ServerRegistrationScreen
+import fr.nexhub.homedia.features.server_registration.presentation.ServerRegistrationScreen
 import java.util.UUID
 
 @OptIn(ExperimentalAnimationApi::class)

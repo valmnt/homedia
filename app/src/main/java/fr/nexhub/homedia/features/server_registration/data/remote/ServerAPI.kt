@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.server.registration.data.remote
+package fr.nexhub.homedia.features.server_registration.data.remote
 
 import retrofit2.http.GET
 import retrofit2.http.Url

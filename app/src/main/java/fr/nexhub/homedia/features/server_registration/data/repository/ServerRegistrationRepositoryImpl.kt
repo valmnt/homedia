@@ -1,10 +1,10 @@
-package fr.nexhub.homedia.features.server.registration.data.repository
+package fr.nexhub.homedia.features.server_registration.data.repository
 
 import arrow.core.Either
 import fr.nexhub.homedia.network.error.NetworkError
 import fr.nexhub.homedia.network.toGeneralError
-import fr.nexhub.homedia.features.server.registration.data.remote.ServerAPI
-import fr.nexhub.homedia.features.server.registration.domain.repository.ServerRegistrationRepository
+import fr.nexhub.homedia.features.server_registration.data.remote.ServerAPI
+import fr.nexhub.homedia.features.server_registration.domain.repository.ServerRegistrationRepository
 import javax.inject.Inject
 
 class ServerRegistrationRepositoryImpl @Inject constructor(

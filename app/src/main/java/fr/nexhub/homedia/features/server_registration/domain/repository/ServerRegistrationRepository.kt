@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.server.registration.domain.repository
+package fr.nexhub.homedia.features.server_registration.domain.repository
 
 import arrow.core.Either
 import fr.nexhub.homedia.network.error.NetworkError

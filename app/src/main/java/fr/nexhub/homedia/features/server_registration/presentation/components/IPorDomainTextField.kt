@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.server.registration.presentation.components
+package fr.nexhub.homedia.features.server_registration.presentation.components
 
 import androidx.compose.foundation.interaction.MutableInteractionSource
 import androidx.compose.foundation.text.KeyboardOptions

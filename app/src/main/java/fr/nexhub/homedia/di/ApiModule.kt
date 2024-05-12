@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import fr.nexhub.homedia.features.server.registration.data.remote.ServerAPI
+import fr.nexhub.homedia.features.server_registration.data.remote.ServerAPI
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton

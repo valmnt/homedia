@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.server.registration.presentation
+package fr.nexhub.homedia.features.server_registration.presentation
 
 import android.widget.Toast
 import androidx.compose.foundation.layout.Box
@@ -25,7 +25,7 @@ import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
-import fr.nexhub.homedia.features.server.registration.presentation.components.IPorDomainTextField
+import fr.nexhub.homedia.features.server_registration.presentation.components.IPorDomainTextField
 import fr.nexhub.homedia.widgets.TvButton
 
 @OptIn(ExperimentalTvMaterial3Api::class)

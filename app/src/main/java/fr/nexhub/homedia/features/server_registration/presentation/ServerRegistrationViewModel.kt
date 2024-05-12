@@ -1,10 +1,10 @@
-package fr.nexhub.homedia.features.server.registration.presentation
+package fr.nexhub.homedia.features.server_registration.presentation
 
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.nexhub.homedia.features.server.registration.domain.repository.ServerRegistrationRepository
+import fr.nexhub.homedia.features.server_registration.domain.repository.ServerRegistrationRepository
 import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.utils.JellyfinAPIConstants
 import kotlinx.coroutines.flow.MutableStateFlow
