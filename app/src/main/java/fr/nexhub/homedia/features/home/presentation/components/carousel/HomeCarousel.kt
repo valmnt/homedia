@@ -43,6 +43,7 @@ fun RowForLibraries(state: HomeViewState, parent: Int, onItemClick: (HorizontalR
             items(state.libraries.size) { child ->
                 CarouselForLibraries(
                     modifier = Modifier,
+                    id = state.libraries[child].id,
                     text = state.libraries[child].title,
                     parent = parent,
                     onItemClick = onItemClick,

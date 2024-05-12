@@ -21,5 +21,5 @@ fun NestedHomeNavigation(
 @Preview
 @Composable
 private fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation(rememberAnimatedNavController(), HomeViewState()) { _ ,_ ->}
+    NestedHomeNavigation(rememberAnimatedNavController(), HomeViewState()) { _, _ ->}
 }

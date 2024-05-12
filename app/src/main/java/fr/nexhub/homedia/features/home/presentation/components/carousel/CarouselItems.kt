@@ -24,17 +24,19 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.widgets.BorderedFocusableItem
 import fr.nexhub.utils.testing.tagForItem
+import java.util.UUID
 
 @Composable
 fun CarouselForLibraries(
     modifier: Modifier = Modifier,
+    id: UUID,
     text: String,
     parent: Int,
     child: Int,
     onItemClick: (HorizontalRowType, List<String>) -> Unit,
 ) {
     BorderedFocusableItem(
-        onClick = { onItemClick(HorizontalRowType.LIBRARIES, listOf(text)) },
+        onClick = { onItemClick(HorizontalRowType.LIBRARIES, listOf(id.toString(), text)) },
         borderRadius = 12.dp,
         modifier = modifier
             .testTag(tagForItem(parent, child))
@@ -86,31 +88,8 @@ fun CarouselForRecentItemsInLibrary(
     }
 }
 
-@Composable
-fun VerticalCarouselItem(parent: Int, child: Int, onItemFocus: (parent: Int, child: Int) -> Unit) {
-    BorderedFocusableItem(
-        onClick = {
-            onItemFocus(parent, child)
-        },
-        modifier = Modifier
-            .padding(8.dp)
-            .aspectRatio(0.6f),
-    ) {
-        Box(contentAlignment = Alignment.Center, modifier = Modifier.fillMaxSize()) {
-            Text(text = "Item $parent x $child", textAlign = TextAlign.Center)
-        }
-    }
-}
-
 @Preview
 @Composable
 fun CarouselForLibrariesPrev() {
-    CarouselForLibraries(Modifier,"Text", 1, 1) { _, _ ->}
-}
-
-@Preview
-@Composable
-fun VerticalCarouselItemPrev() {
-    VerticalCarouselItem(1, 1) { _, _ ->
-    }
+    CarouselForLibraries(Modifier,UUID.randomUUID(), "Text", 1, 1) { _, _ ->}
 }

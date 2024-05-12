@@ -14,8 +14,9 @@ import fr.nexhub.homedia.features.details.ProductDetailsScreen
 import fr.nexhub.homedia.features.home.presentation.HomeScreen
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
-import fr.nexhub.homedia.features.media.MediaScreen
+import fr.nexhub.homedia.features.item_list.ItemListScreen
 import fr.nexhub.homedia.features.server.registration.presentation.ServerRegistrationScreen
+import java.util.UUID
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
@@ -43,7 +44,7 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
             HomeScreen { horizontalRowType, args ->
                 when(horizontalRowType) {
                     HorizontalRowType.LIBRARIES -> {
-                        navController.navigate("${Screens.Media.title}/${args.first()}")
+                        navController.navigate("${Screens.ItemList.title}/${args[0]}/${args[1]}")
                     }
                     HorizontalRowType.RECENT_ITEMS -> {
                         navController.navigate(Screens.Details.title)
@@ -53,10 +54,13 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         }
 
         composable(
-            "${Screens.Media.title}/{title}"
+            "${Screens.ItemList.title}/{id}/{title}"
         ) {navBackStackEntry ->
+            val id = navBackStackEntry.arguments?.getString("id")
             val title = navBackStackEntry.arguments?.getString("title")
-            MediaScreen(title ?: "Media") { _, _ -> }
+            ItemListScreen(UUID.fromString(id), title ?: "Media") {
+                navController.navigate(Screens.Details.title)
+            }
         }
 
         composable(

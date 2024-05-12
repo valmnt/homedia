@@ -1,15 +1,15 @@
-package fr.nexhub.homedia.features.home.data.repository
+package fr.nexhub.homedia.common.data.repository
 
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import fr.nexhub.homedia.features.home.domain.model.RecentItem
-import fr.nexhub.homedia.features.home.domain.repository.RecentItemRepository
+import fr.nexhub.homedia.common.domain.model.Item
+import fr.nexhub.homedia.common.domain.repository.ItemRepository
 import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.network.error.NetworkError
 import fr.nexhub.homedia.network.toGeneralError
 import fr.nexhub.homedia.utils.byteReadChannelToBitmap
-import fr.nexhub.homedia.utils.toRecentItem
+import fr.nexhub.homedia.utils.toItem
 import io.ktor.utils.io.ByteReadChannel
 import org.jellyfin.sdk.api.client.exception.InvalidStatusException
 import org.jellyfin.sdk.api.client.extensions.imageApi
@@ -21,9 +21,9 @@ import org.jellyfin.sdk.model.api.SortOrder
 import java.util.UUID
 import javax.inject.Inject
 
-class RecentItemRepositoryImpl @Inject constructor(): RecentItemRepository {
+class ItemRepositoryImpl @Inject constructor(): ItemRepository {
 
-    override suspend fun getRecentItems(libraryId: UUID): Either<NetworkError, List<RecentItem>> {
+    override suspend fun getItems(libraryId: UUID, limit: Int?): Either<NetworkError, List<Item>> {
         return try {
             val resp = JellyfinManager.api.itemsApi.getItems(
                 userId = JellyfinManager.api.userId,
@@ -31,16 +31,16 @@ class RecentItemRepositoryImpl @Inject constructor(): RecentItemRepository {
                 includeItemTypes = listOf(BaseItemKind.MOVIE, BaseItemKind.SERIES),
                 sortBy = listOf("DateCreated"),
                 sortOrder = listOf(SortOrder.DESCENDING),
-                limit = 10
+                limit = limit
             )
             val items = resp.content.items
             if (items.isNullOrEmpty()) {
-                val list: List<RecentItem> = listOf()
+                val list: List<Item> = listOf()
                 list.right()
             } else {
-                items.map { item ->
-                    val bitmap = getRecentItemImage(item).byteReadChannelToBitmap()
-                    item.toRecentItem(bitmap)
+                items.map {
+                    val bitmap = getItemImage(it).byteReadChannelToBitmap()
+                    it.toItem(bitmap)
                 }.right()
             }
         } catch (err: InvalidStatusException) {
@@ -48,7 +48,7 @@ class RecentItemRepositoryImpl @Inject constructor(): RecentItemRepository {
         }
     }
 
-    private suspend fun getRecentItemImage(item: BaseItemDto): ByteReadChannel {
+    private suspend fun getItemImage(item: BaseItemDto): ByteReadChannel {
         return JellyfinManager.api.imageApi.getItemImage(
             itemId = item.id,
             imageType = ImageType.PRIMARY,

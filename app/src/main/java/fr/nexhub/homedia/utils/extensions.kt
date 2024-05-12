@@ -12,8 +12,8 @@ import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT
 import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onPreviewKeyEvent
+import fr.nexhub.homedia.common.domain.model.Item
 import fr.nexhub.homedia.features.home.domain.model.Library
-import fr.nexhub.homedia.features.home.domain.model.RecentItem
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.readBytes
 import kotlinx.coroutines.Dispatchers
@@ -86,7 +86,7 @@ suspend fun ByteReadChannel.byteReadChannelToBitmap(): Bitmap? {
     return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
 }
 
-fun  BaseItemDto.toLibrary(recentItems: List<RecentItem>): Library {
+fun  BaseItemDto.toLibrary(recentItems: List<Item>): Library {
     return Library(
         id = this.id,
         title = this.name ?: "Unknown",
@@ -94,8 +94,8 @@ fun  BaseItemDto.toLibrary(recentItems: List<RecentItem>): Library {
     )
 }
 
-fun  BaseItemDto.toRecentItem(image: Bitmap?): RecentItem {
-    return RecentItem(
+fun  BaseItemDto.toItem(image: Bitmap?): Item {
+    return Item(
         id = this.id,
         image = image,
         title = this.name ?: "Unknown"
