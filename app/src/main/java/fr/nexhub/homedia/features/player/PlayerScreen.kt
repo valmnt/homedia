@@ -18,10 +18,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
+import fr.nexhub.exoplayer.PlayerFactory
 import fr.nexhub.homedia.features.player.controls.PlayerControls
 import fr.nexhub.homedia.features.player.controls.rememberVideoPlayerState
 import fr.nexhub.homedia.utils.handleDPadKeyEvents
-import fr.nexhub.exoplayer.PlayerFactory
 import fr.nexhub.player.domain.state.PlayerState
 import fr.nexhub.player.domain.state.PlayerStateListener
 import kotlinx.coroutines.delay

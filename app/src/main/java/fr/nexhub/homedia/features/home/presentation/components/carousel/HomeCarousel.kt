@@ -62,6 +62,7 @@ fun RowForRecentItemsInLibrary(state: HomeViewState, parent: Int, onItemClick: (
             items(recentItems.size) { child ->
                 CardCarouselForRecentItemInLibrary(
                     modifier = Modifier,
+                    id = recentItems[child].id,
                     text = recentItems[child].title,
                     bitmap = recentItems[child].image,
                     parent = parent,

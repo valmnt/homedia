@@ -1,7 +1,7 @@
-package fr.nexhub.homedia.features.common.domain.repository
+package fr.nexhub.homedia.features.common.item.domain.repository
 
 import arrow.core.Either
-import fr.nexhub.homedia.features.common.domain.model.Item
+import fr.nexhub.homedia.features.common.item.domain.model.Item
 import fr.nexhub.homedia.network.error.NetworkError
 import java.util.UUID
 

@@ -3,7 +3,7 @@ package fr.nexhub.homedia.features.home.data.repository
 import arrow.core.Either
 import arrow.core.left
 import arrow.core.right
-import fr.nexhub.homedia.features.common.domain.repository.ItemRepository
+import fr.nexhub.homedia.features.common.item.domain.repository.ItemRepository
 import fr.nexhub.homedia.features.home.domain.model.Library
 import fr.nexhub.homedia.features.home.domain.repository.LibraryRepository
 import fr.nexhub.homedia.managers.JellyfinManager

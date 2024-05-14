@@ -1,6 +1,6 @@
 package fr.nexhub.homedia.features.home.domain.model
 
-import fr.nexhub.homedia.features.common.domain.model.Item
+import fr.nexhub.homedia.features.common.item.domain.model.Item
 import java.util.UUID
 
 data class Library(

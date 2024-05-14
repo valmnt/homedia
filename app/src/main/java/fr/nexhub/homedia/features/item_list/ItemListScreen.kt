@@ -12,7 +12,7 @@ import androidx.tv.material3.ExperimentalTvMaterial3Api
 import java.util.UUID
 
 @Composable
-fun ItemListScreen(id: UUID, title: String, onItemFocus: () -> Unit) {
+fun ItemListScreen(id: UUID, title: String, onItemFocus: (itemId: UUID) -> Unit) {
     val viewModel: ItemListViewModel = hiltViewModel()
     viewModel.getItemsFromLibrary(id)
     val state by viewModel.state.collectAsState()

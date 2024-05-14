@@ -1,11 +1,11 @@
 <resources>
     <string name="app_name">Homedia</string>
     <string name="app_icon_name">Homedia Icon</string>
-    <string name="watch_trailer">Watch Trailer</string>
-    <string name="movie_desciption">\"Batman ventures into Gotham City\'s underworld when a sadistic killer leaves behind a trail of cryptic clues. \"</string>
-    <string name="movie_name">Batman</string>
-    <string name="release_year">2022</string>
-    <string name="movie_duration_text">2h 56mm</string>
+
+    // Common
+    <string name="play">Play</string>
+    <string name="no_content_available">No Content Available</string>
+    <string name="an_error_occurred">An Error Occurred</string>
 
     // Network error
     <string name="unable_to_connect_to_the_server">Unable to connect to the server</string>
@@ -36,4 +36,9 @@
     // Home
     <string name="libraries">Libraries</string>
     <string name="recently_added_in">Recently added in</string>
+
+    // Details
+    <string name="overview">Overview</string>
+    <string name="seasons">Seasons</string>
+
 </resources>

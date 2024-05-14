@@ -15,9 +15,9 @@ import androidx.compose.ui.unit.sp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
-import fr.nexhub.homedia.features.login.withQuickConnect.presentation.components.QuickConnectTitle
 import fr.nexhub.homedia.R
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.components.QuickConnectSteps
+import fr.nexhub.homedia.features.login.withQuickConnect.presentation.components.QuickConnectTitle
 
 @Composable
 fun QuickConnectContent(status: Int, code: String?) {

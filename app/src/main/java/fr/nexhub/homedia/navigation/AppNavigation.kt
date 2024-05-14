@@ -10,11 +10,12 @@ import androidx.navigation.NavGraph.Companion.findStartDestination
 import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
-import fr.nexhub.homedia.features.details.ProductDetailsScreen
+import fr.nexhub.homedia.features.episodes.presentation.EpisodesScreen
 import fr.nexhub.homedia.features.home.presentation.HomeScreen
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
-import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
 import fr.nexhub.homedia.features.item_list.ItemListScreen
+import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
+import fr.nexhub.homedia.features.overview.presentation.OverviewScreen
 import fr.nexhub.homedia.features.server_registration.presentation.ServerRegistrationScreen
 import java.util.UUID
 
@@ -47,7 +48,7 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
                         navController.navigate("${Screens.ItemList.title}/${args[0]}/${args[1]}")
                     }
                     HorizontalRowType.RECENT_ITEMS -> {
-                        navController.navigate(Screens.Details.title)
+                        navController.navigate("${Screens.Overview.title}/${args[0]}")
                     }
                 }
             }
@@ -58,15 +59,26 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         ) {navBackStackEntry ->
             val id = navBackStackEntry.arguments?.getString("id")
             val title = navBackStackEntry.arguments?.getString("title")
-            ItemListScreen(UUID.fromString(id), title ?: "Media") {
-                navController.navigate(Screens.Details.title)
+            ItemListScreen(UUID.fromString(id), title ?: "Media") { itemId ->
+                navController.navigate("${Screens.Overview.title}/$itemId")
             }
         }
 
         composable(
-            Screens.Details.title
-        ) {
-           ProductDetailsScreen() {}
+            "${Screens.Overview.title}/{itemId}",
+        ) {navBackStackEntry ->
+            val itemId = navBackStackEntry.arguments?.getString("itemId")
+            OverviewScreen(UUID.fromString(itemId), onPlayClick = {}, selectedSeason = { itemId, seasonId ->
+                navController.navigate("${Screens.Episodes.title}/$itemId/$seasonId")
+            })
+        }
+
+        composable(
+            "${Screens.Episodes.title}/{itemId}/{seasonId}",
+        ) {navBackStackEntry ->
+            val itemId = navBackStackEntry.arguments?.getString("itemId")
+            val seasonId = navBackStackEntry.arguments?.getString("seasonId")
+            EpisodesScreen(itemId = UUID.fromString(itemId), seasonId = UUID.fromString(seasonId))
         }
     }
 }

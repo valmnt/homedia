@@ -12,15 +12,27 @@ import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_LEFT
 import android.view.KeyEvent.KEYCODE_SYSTEM_NAVIGATION_RIGHT
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.input.key.onPreviewKeyEvent
-import fr.nexhub.homedia.features.common.domain.model.Item
+import arrow.core.Either
+import arrow.core.left
+import arrow.core.right
+import fr.nexhub.homedia.features.common.item.domain.model.Item
+import fr.nexhub.homedia.features.episodes.domain.model.Episode
 import fr.nexhub.homedia.features.home.domain.model.Library
+import fr.nexhub.homedia.features.overview.domain.model.Details
+import fr.nexhub.homedia.features.overview.domain.model.Season
+import fr.nexhub.homedia.managers.JellyfinManager
+import fr.nexhub.homedia.network.error.NetworkError
+import fr.nexhub.homedia.network.toGeneralError
 import io.ktor.utils.io.ByteReadChannel
 import io.ktor.utils.io.core.readBytes
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.withContext
+import org.jellyfin.sdk.api.client.exception.InvalidStatusException
+import org.jellyfin.sdk.api.client.extensions.imageApi
 import org.jellyfin.sdk.model.api.BaseItemDto
+import org.jellyfin.sdk.model.api.ImageType
 
 fun <T> StateFlow<T>.toMutable() = this as MutableStateFlow
 
@@ -86,6 +98,19 @@ suspend fun ByteReadChannel.byteReadChannelToBitmap(): Bitmap? {
     return BitmapFactory.decodeByteArray(byteArray, 0, byteArray.size)
 }
 
+suspend fun BaseItemDto.getItemImage(width: Int, height: Int): Either<NetworkError, ByteReadChannel> {
+    return try {
+        return JellyfinManager.api.imageApi.getItemImage(
+            itemId = this.id,
+            imageType = ImageType.PRIMARY,
+            width = width,
+            height = height
+        ).content.right()
+    } catch (err: InvalidStatusException) {
+        err.toGeneralError().left()
+    }
+}
+
 fun  BaseItemDto.toLibrary(recentItems: List<Item>): Library {
     return Library(
         id = this.id,
@@ -94,10 +119,42 @@ fun  BaseItemDto.toLibrary(recentItems: List<Item>): Library {
     )
 }
 
-fun  BaseItemDto.toItem(image: Bitmap?): Item {
+fun  BaseItemDto.toItem(image: Bitmap?, details: Details?): Item {
     return Item(
         id = this.id,
         image = image,
-        title = this.name ?: "Unknown"
+        title = this.name ?: "Unknown",
+        details = details
+    )
+}
+
+fun  BaseItemDto.toDetails(): Details {
+    val totalSeconds = this.runTimeTicks?.div(10_000_000)
+    val hours = totalSeconds?.div(3600)
+    val minutes = (totalSeconds?.rem(3600))?.div(60)
+    return Details(
+        type = this.type,
+        productionYear = this.productionYear,
+        communityRating = this.communityRating,
+        overview = this.overview,
+        duration = "${hours}h${minutes}",
+        genres = this.genres
+    )
+}
+
+fun BaseItemDto.toSeason(image: Bitmap?): Season {
+    return Season (
+        id = this.id,
+        title = this.name ?: "???",
+        image = image
+    )
+}
+
+fun BaseItemDto.toEpisode(image: Bitmap?): Episode {
+    return Episode (
+        id = this.id,
+        title = this.name ?: "???",
+        image = image,
+        overview = this.overview
     )
 }

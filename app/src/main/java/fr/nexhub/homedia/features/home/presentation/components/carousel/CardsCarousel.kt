@@ -51,6 +51,7 @@ fun CardCarouselForLibrary(
 @Composable
 fun CardCarouselForRecentItemInLibrary(
     modifier: Modifier = Modifier,
+    id: UUID,
     text: String,
     bitmap: Bitmap?,
     parent: Int,
@@ -58,7 +59,7 @@ fun CardCarouselForRecentItemInLibrary(
     onItemClick: (HorizontalRowType, List<String>) -> Unit,
 ) {
     BorderedFocusableItem(
-        onClick = { onItemClick(HorizontalRowType.RECENT_ITEMS, listOf()) },
+        onClick = { onItemClick(HorizontalRowType.RECENT_ITEMS, listOf(id.toString())) },
         borderRadius = 12.dp,
         color = ClickableSurfaceDefaults.colors(
             containerColor = MaterialTheme.colorScheme.onSurface,

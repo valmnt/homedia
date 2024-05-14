@@ -9,12 +9,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
+import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
 import fr.nexhub.homedia.features.home.presentation.components.navigation.NestedHomeNavigation
 import fr.nexhub.homedia.features.home.presentation.components.navigation.data.MenuData
 import fr.nexhub.homedia.features.home.presentation.components.navigation.topbar.HomeTopBar
 import fr.nexhub.homedia.theme.HomediaTheme
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable

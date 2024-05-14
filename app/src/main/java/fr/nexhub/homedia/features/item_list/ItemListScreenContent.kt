@@ -9,13 +9,14 @@ import androidx.tv.foundation.lazy.grid.TvGridItemSpan
 import androidx.tv.foundation.lazy.grid.TvLazyVerticalGrid
 import fr.nexhub.homedia.features.common.components.CardCarouselForItem
 import fr.nexhub.homedia.features.item_list.components.GridHeader
+import java.util.UUID
 
 @Composable
 fun ItemListScreenContent(
     modifier: Modifier,
     state: ItemListViewState,
     title: String,
-    onItemFocus: () -> Unit
+    onItemFocus: (itemId: UUID) -> Unit
 ) {
     TvLazyVerticalGrid(
         modifier = modifier,
@@ -29,8 +30,7 @@ fun ItemListScreenContent(
         }
         items(state.items.size) {
             CardCarouselForItem(
-                bitmap = state.items[it].image,
-                text = state.items[it].title,
+                item = state.items[it],
                 onItemFocus
             )
         }

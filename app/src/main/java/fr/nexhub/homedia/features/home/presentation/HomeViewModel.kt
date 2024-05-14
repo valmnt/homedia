@@ -35,6 +35,9 @@ class HomeViewModel @Inject constructor(
                 }
             }
             .onLeft { error ->
+                _state.update {
+                    it.copy(isLoading = false)
+                }
                 Timber.tag("GET_LIBRARIES_ERROR").d(error.t?.message ?: "")
             }
         }
