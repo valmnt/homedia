@@ -4,6 +4,8 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.ErrorView
 import fr.nexhub.homedia.features.home.presentation.HomeViewState
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HomeCarousel
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
@@ -13,11 +15,17 @@ fun HomeNestedScreen(
     state: HomeViewState,
     onItemClick: (HorizontalRowType, List<String>) -> Unit
 ) {
-    Column(Modifier.fillMaxSize()) {
-        HomeCarousel(
-            Modifier.weight(1f),
-            state = state,
-            onItemClick = onItemClick,
-        )
+    if (state.isLoading) {
+        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+    } else if (state.libraries != null) {
+        Column(Modifier.fillMaxSize()) {
+            HomeCarousel(
+                Modifier.weight(1f),
+                libraries = state.libraries,
+                onItemClick = onItemClick,
+            )
+        }
+    } else {
+
     }
 }

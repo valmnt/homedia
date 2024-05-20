@@ -10,5 +10,5 @@ import fr.nexhub.homedia.features.home.presentation.components.carousel.Horizont
 fun HomeScreen(onItemClick: (HorizontalRowType, List<String>) -> Unit) {
     val viewModel: HomeViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
-    HomeScreenContent(state, onItemClick)
+    HomeContent(state, onItemClick)
 }

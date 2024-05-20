@@ -12,42 +12,45 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.tv.foundation.lazy.list.TvLazyColumn
 import fr.nexhub.homedia.R
-import fr.nexhub.homedia.features.home.presentation.HomeViewState
+import fr.nexhub.homedia.features.common.components.EmptyView
+import fr.nexhub.homedia.features.home.domain.model.Library
 import fr.nexhub.utils.testing.SECTIONS_LIST_TAG
 
 @Composable
 fun HomeCarousel(
     modifier: Modifier,
-    state: HomeViewState,
+    libraries: List<Library>,
     onItemClick: (HorizontalRowType, List<String>) -> Unit
 ) {
-    TvLazyColumn(
-        modifier.testTag(SECTIONS_LIST_TAG),
-        contentPadding = PaddingValues(bottom = 100.dp)
-    ) {
-        items(1) { parent ->
-            RowForLibraries(state, parent, onItemClick)
-            Spacer(modifier = Modifier.height(20.dp))
-        }
-        items(state.libraries.size) { parent ->
-            RowForRecentItemsInLibrary(state, parent, onItemClick)
-            Spacer(modifier = Modifier.height(20.dp))
+    if (libraries.isEmpty()) {
+        EmptyView()
+    } else {
+        TvLazyColumn(
+            modifier.testTag(SECTIONS_LIST_TAG),
+            contentPadding = PaddingValues(bottom = 100.dp)
+        ) {
+            items(1) {
+                RowForLibraries(libraries, onItemClick)
+                Spacer(modifier = Modifier.height(20.dp))
+            }
+            items(libraries.size) { parent ->
+                RowForRecentItemsInLibrary(libraries[parent], onItemClick)
+                Spacer(modifier = Modifier.height(20.dp))
+            }
         }
     }
 }
 
 @Composable
-fun RowForLibraries(state: HomeViewState, parent: Int, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
-    if (state.libraries.isNotEmpty()) {
+fun RowForLibraries(libraries: List<Library>, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
+    if (libraries.isNotEmpty()) {
         HorizontalCarouselItem(text = stringResource(R.string.libraries)) {
-            items(state.libraries.size) { child ->
+            items(libraries.size) {
                 CardCarouselForLibrary(
                     modifier = Modifier,
-                    id = state.libraries[child].id,
-                    text = state.libraries[child].title,
-                    parent = parent,
-                    onItemClick = onItemClick,
-                    child = child,
+                    id = libraries[it].id,
+                    text = libraries[it].title,
+                    onItemClick = onItemClick
                 )
             }
         }
@@ -55,18 +58,16 @@ fun RowForLibraries(state: HomeViewState, parent: Int, onItemClick: (HorizontalR
 }
 
 @Composable
-fun RowForRecentItemsInLibrary(state: HomeViewState, parent: Int, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
-    val recentItems = state.libraries[parent].recentItems
+fun RowForRecentItemsInLibrary(library: Library, onItemClick: (HorizontalRowType, List<String>) -> Unit) {
+    val recentItems = library.recentItems
     if (recentItems != null) {
-        HorizontalCarouselItem(text = "${stringResource(R.string.recently_added_in)} ${state.libraries[parent].title}") {
-            items(recentItems.size) { child ->
+        HorizontalCarouselItem(text = "${stringResource(R.string.recently_added_in)} ${library.title}") {
+            items(recentItems.size) {
                 CardCarouselForRecentItemInLibrary(
                     modifier = Modifier,
-                    id = recentItems[child].id,
-                    text = recentItems[child].title,
-                    bitmap = recentItems[child].image,
-                    parent = parent,
-                    child = child,
+                    id = recentItems[it].id,
+                    text = recentItems[it].title,
+                    bitmap = recentItems[it].image,
                     onItemClick = onItemClick,
                 )
             }
@@ -78,6 +79,6 @@ fun RowForRecentItemsInLibrary(state: HomeViewState, parent: Int, onItemClick: (
 @Composable
 fun HomeCarouselPrev() {
     Column {
-        HomeCarousel(Modifier, HomeViewState()) { _, _ -> }
+        HomeCarousel(modifier = Modifier, libraries = listOf()) { _,_ -> }
     }
 }

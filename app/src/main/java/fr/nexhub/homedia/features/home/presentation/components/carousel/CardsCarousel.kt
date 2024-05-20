@@ -15,14 +15,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.blur
 import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
-import androidx.compose.ui.platform.testTag
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.features.common.components.BorderedFocusableItem
-import fr.nexhub.utils.testing.tagForItem
 import java.util.UUID
 
 @Composable
@@ -30,15 +28,12 @@ fun CardCarouselForLibrary(
     modifier: Modifier = Modifier,
     id: UUID,
     text: String,
-    parent: Int,
-    child: Int,
     onItemClick: (HorizontalRowType, List<String>) -> Unit,
 ) {
     BorderedFocusableItem(
         onClick = { onItemClick(HorizontalRowType.LIBRARIES, listOf(id.toString(), text)) },
         borderRadius = 12.dp,
         modifier = modifier
-            .testTag(tagForItem(parent, child))
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
     ) {
@@ -54,8 +49,6 @@ fun CardCarouselForRecentItemInLibrary(
     id: UUID,
     text: String,
     bitmap: Bitmap?,
-    parent: Int,
-    child: Int,
     onItemClick: (HorizontalRowType, List<String>) -> Unit,
 ) {
     BorderedFocusableItem(
@@ -66,7 +59,6 @@ fun CardCarouselForRecentItemInLibrary(
             focusedContainerColor = MaterialTheme.colorScheme.onSurface
         ),
         modifier = modifier
-            .testTag(tagForItem(parent, child))
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)
     ) {

@@ -23,30 +23,24 @@ import fr.nexhub.homedia.R
 
 @Composable
 fun ErrorView() {
-    Box(
+    Column(
         modifier = Modifier
             .fillMaxSize()
-            .background(color = MaterialTheme.colorScheme.onBackground)
+            .padding(16.dp),
+        verticalArrangement = Arrangement.Center,
+        horizontalAlignment = Alignment.CenterHorizontally
     ) {
-        Column(
-            modifier = Modifier
-                .fillMaxSize()
-                .padding(16.dp),
-            verticalArrangement = Arrangement.Center,
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            Icon(
-                imageVector = Icons.Filled.Error,
-                contentDescription = "Error Icon",
-                tint = MaterialTheme.colorScheme.error,
-                modifier = Modifier.size(64.dp)
-            )
-            Spacer(modifier = Modifier.size(8.dp))
-            Text(
-                text = stringResource(R.string.an_error_occurred),
-                fontSize = 24.sp,
-                color = MaterialTheme.colorScheme.error
-            )
-        }
+        Icon(
+            imageVector = Icons.Filled.Error,
+            contentDescription = "Error Icon",
+            tint = MaterialTheme.colorScheme.error,
+            modifier = Modifier.size(64.dp)
+        )
+        Spacer(modifier = Modifier.size(8.dp))
+        Text(
+            text = stringResource(R.string.an_error_occurred),
+            fontSize = 24.sp,
+            color = MaterialTheme.colorScheme.error
+        )
     }
 }
