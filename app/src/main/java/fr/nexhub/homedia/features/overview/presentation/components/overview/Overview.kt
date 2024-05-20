@@ -7,12 +7,14 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.heightIn
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.LocalContentColor
@@ -46,14 +48,17 @@ fun Overview(item: Item) {
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.headlineLarge,
                 text = item.title,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.size(10.dp))
             Text(
-                modifier = Modifier,
+                modifier = Modifier.heightIn(max = 120.dp),
                 color = LocalContentColor.current,
                 textAlign = TextAlign.Start,
                 style = MaterialTheme.typography.bodyLarge,
                 text = item.details?.overview ?: "",
+                overflow = TextOverflow.Ellipsis
             )
             Spacer(modifier = Modifier.size(10.dp))
             when (item.details?.type) {
