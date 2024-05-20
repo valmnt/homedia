@@ -25,11 +25,14 @@ class ItemListViewModel @Inject constructor(
             itemRepository.getItems(libraryId, null)
             .onRight { items ->
                 _state.update {
-                    it.copy(items = items)
+                    it.copy(items = items, isLoading = false)
                 }
                 items.forEach { Timber.tag("GET_ITEM_LIST").d(it.title) }
             }
             .onLeft { error ->
+                _state.update {
+                    it.copy(isLoading = false)
+                }
                 Timber.tag("GET_ITEM_LIST_ERROR").d(error.t?.message ?: "")
             }
         }
