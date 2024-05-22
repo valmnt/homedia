@@ -16,6 +16,7 @@ import fr.nexhub.homedia.features.home.presentation.components.carousel.Horizont
 import fr.nexhub.homedia.features.item_list.ItemListScreen
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.QuickConnectScreen
 import fr.nexhub.homedia.features.overview.presentation.OverviewScreen
+import fr.nexhub.homedia.features.player.presentation.PlayerScreen
 import fr.nexhub.homedia.features.server_registration.presentation.ServerRegistrationScreen
 import java.util.UUID
 
@@ -68,9 +69,15 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
             "${Screens.Overview.title}/{itemId}",
         ) {navBackStackEntry ->
             val itemId = navBackStackEntry.arguments?.getString("itemId")
-            OverviewScreen(UUID.fromString(itemId), onPlayClick = {}, selectedSeason = { itemId, seasonId ->
-                navController.navigate("${Screens.Episodes.title}/$itemId/$seasonId")
-            })
+            OverviewScreen(
+                UUID.fromString(itemId),
+                onSeasonClick = { seasonId ->
+                    navController.navigate("${Screens.Episodes.title}/$itemId/$seasonId")
+                },
+                onPlayClick = { title ->
+                    navController.navigate("${Screens.Player.title}/$itemId/$title")
+                }
+            )
         }
 
         composable(
@@ -78,7 +85,19 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         ) {navBackStackEntry ->
             val itemId = navBackStackEntry.arguments?.getString("itemId")
             val seasonId = navBackStackEntry.arguments?.getString("seasonId")
-            EpisodesScreen(itemId = UUID.fromString(itemId), seasonId = UUID.fromString(seasonId))
+            EpisodesScreen(itemId = UUID.fromString(itemId), seasonId = UUID.fromString(seasonId)) { episodeId, title ->
+                navController.navigate("${Screens.Player.title}/$episodeId/$title")
+            }
+        }
+
+        composable(
+            "${Screens.Player.title}/{itemId}/{title}",
+        ) { navBackStackEntry ->
+            val itemId = navBackStackEntry.arguments?.getString("itemId")
+            val title = navBackStackEntry.arguments?.getString("title")
+            PlayerScreen(UUID.fromString(itemId), title ?: "Unknown") {
+                navController.popBackStack()
+            }
         }
     }
 }

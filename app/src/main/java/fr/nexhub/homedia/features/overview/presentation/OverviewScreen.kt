@@ -16,16 +16,26 @@ import java.util.UUID
 const val ANIMATION_DELAY = 200L
 
 @Composable
-fun OverviewScreen(itemId: UUID, onPlayClick: () -> Unit, selectedSeason: (itemID: UUID, seasonId: UUID) -> Unit) {
+fun OverviewScreen(
+    itemId: UUID,
+    onSeasonClick: (seasonId: UUID) -> Unit,
+    onPlayClick: (title: String) -> Unit) {
     val viewModel: OverviewViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
     if (state.isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
         viewModel.getDetails(itemId)
     } else if (state.item != null) {
-        OverviewContent(state.item!!, state.seasons, selectedSeason = { seasonId ->
-            selectedSeason(itemId, seasonId)
-        })
+        OverviewContent(
+            state.item!!,
+            state.seasons,
+            onSeasonClick = { seasonId ->
+                onSeasonClick(seasonId)
+            },
+            onPlayClick = {
+                onPlayClick(state.item!!.title)
+            }
+        )
     } else {
         ErrorView()
     }
@@ -35,6 +45,6 @@ fun OverviewScreen(itemId: UUID, onPlayClick: () -> Unit, selectedSeason: (itemI
 @Composable
 fun OverviewScreenPrev() {
     HomediaTheme {
-        OverviewScreen(UUID.randomUUID(), onPlayClick = {}, selectedSeason = { _, _ -> })
+        OverviewScreen(UUID.randomUUID(), onSeasonClick = { _ -> }, onPlayClick = { _ ->})
     }
 }

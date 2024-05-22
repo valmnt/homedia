@@ -29,7 +29,10 @@ import org.jellyfin.sdk.model.api.BaseItemKind
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun Header(item: Item, selectHeader: (HeaderItems) -> Unit) {
+fun Header(
+    item: Item,
+    onHeaderClick: (HeaderItems) -> Unit,
+    onPlayClick: () -> Unit) {
     val focusRequester = remember { FocusRequester() }
 
     LaunchedEffect(key1 = Unit) {
@@ -46,18 +49,20 @@ fun Header(item: Item, selectHeader: (HeaderItems) -> Unit) {
         horizontalArrangement = Arrangement.Start,
     ) {
         Spacer(modifier = Modifier.width(280.dp))
-        TvButton(
-            modifier = Modifier
-                .padding(horizontal = 16.dp, vertical = 4.dp),
-            onClick = {},
-        ) {
-            Text(stringResource(R.string.play))
+        if (item.details?.type == BaseItemKind.MOVIE) {
+            TvButton(
+                modifier = Modifier
+                    .padding(horizontal = 16.dp, vertical = 4.dp),
+                onClick = onPlayClick,
+            ) {
+                Text(stringResource(R.string.play))
+            }
         }
         TvButton(
             modifier = Modifier
                 .padding(horizontal = 16.dp, vertical = 4.dp)
                 .focusRequester(focusRequester),
-            onClick = { selectHeader(HeaderItems.OVERVIEW) },
+            onClick = { onHeaderClick(HeaderItems.OVERVIEW) },
         ) {
             Text(stringResource(R.string.overview))
         }
@@ -65,7 +70,7 @@ fun Header(item: Item, selectHeader: (HeaderItems) -> Unit) {
             TvButton(
                 modifier = Modifier
                     .padding(horizontal = 16.dp, vertical = 4.dp),
-                onClick = { selectHeader(HeaderItems.SEASONS) },
+                onClick = { onHeaderClick(HeaderItems.SEASONS) },
             ) {
                 Text(stringResource(R.string.seasons))
             }

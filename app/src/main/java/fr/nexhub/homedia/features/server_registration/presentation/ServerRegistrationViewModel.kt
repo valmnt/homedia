@@ -41,7 +41,7 @@ class ServerRegistrationViewModel @Inject constructor(
                 _state.update {
                     it.copy(error = error, isLoading = false)
                 }
-                Timber.tag("GET_PING_ERROR").d(error.t?.message ?: "")
+                Timber.tag("GET_PING_ERROR").d(error.details.code.toString() ?: "")
             }
         }
     }

@@ -1,7 +1,8 @@
-package fr.nexhub.homedia.features.player
+package fr.nexhub.homedia.features.player.presentation
 
 import android.annotation.SuppressLint
 import androidx.activity.compose.BackHandler
+import androidx.compose.foundation.background
 import androidx.compose.foundation.focusable
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
@@ -9,18 +10,18 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.mutableLongStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.viewinterop.AndroidView
 import fr.nexhub.exoplayer.PlayerFactory
-import fr.nexhub.homedia.features.player.controls.PlayerControls
-import fr.nexhub.homedia.features.player.controls.rememberVideoPlayerState
+import fr.nexhub.homedia.features.player.presentation.components.PlayerControls
+import fr.nexhub.homedia.features.player.presentation.components.rememberVideoPlayerState
 import fr.nexhub.homedia.utils.handleDPadKeyEvents
 import fr.nexhub.player.domain.state.PlayerState
 import fr.nexhub.player.domain.state.PlayerStateListener
@@ -28,14 +29,14 @@ import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import timber.log.Timber
 
-@Composable
-fun PlayerScreen(mediaUrl: String, onBackPressed: () -> Unit) {
-    PlayerScreenContent(Modifier, mediaUrl, onBackPressed)
-}
 
 @SuppressLint("UnsafeOptInUsageError")
 @Composable
-fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () -> Unit) {
+fun PlayerContent(
+    modifier: Modifier,
+    title: String,
+    mediaUrl: String,
+    onBackPressed: () -> Unit) {
     val context = LocalContext.current
 
     val player = remember {
@@ -43,7 +44,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     }
 
     val coroutineScope = rememberCoroutineScope()
-    var contentCurrentPosition: Long by remember { mutableStateOf(0L) }
+    var contentCurrentPosition: Long by remember { mutableLongStateOf(0L) }
     val videoPlayerState = rememberVideoPlayerState(hideSeconds = 4, coroutineScope)
 
     val stateListener = remember {
@@ -57,7 +58,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
     BackHandler(onBack = onBackPressed)
 
     LaunchedEffect(Unit) {
-        player.prepare(mediaUrl, false)
+        player.prepare(mediaUrl, true)
         player.setPlaybackEvent(callback = stateListener)
     }
 
@@ -68,27 +69,30 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
         }
     }
 
-    Box(modifier = modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        DisposableEffect(
-            AndroidView(
-                modifier = Modifier
-                    .handleDPadKeyEvents(
-                        onEnter = {
-                            if (!videoPlayerState.isDisplayed) {
-                                coroutineScope.launch {
-                                    videoPlayerState.showControls()
-                                }
-                            }
-                        },
-                    )
-                    .focusable(),
-                factory = {
-                    player.getView()
-                },
-            ),
-        ) {
+    Box(
+        modifier = modifier
+            .fillMaxSize()
+            .background(color = Color.Black),
+        contentAlignment = Alignment.Center) {
+        DisposableEffect(Unit) {
             onDispose { player.release() }
         }
+        AndroidView(
+            modifier = Modifier
+                .handleDPadKeyEvents(
+                    onEnter = {
+                        if (!videoPlayerState.isDisplayed) {
+                            coroutineScope.launch {
+                                videoPlayerState.showControls()
+                            }
+                        }
+                    },
+                )
+                .focusable(),
+            factory = {
+                player.getView()
+            },
+        )
         PlayerControls(
             modifier = Modifier.align(Alignment.BottomCenter),
             isPlaying = player.isPlaying,
@@ -105,13 +109,7 @@ fun PlayerScreenContent(modifier: Modifier, mediaUrl: String, onBackPressed: () 
             onSeek = { seekProgress ->
                 player.seekTo(player.duration.times(seekProgress).toLong())
             },
+            title = title
         )
-    }
-}
-
-@Preview
-@Composable
-private fun PlayerScreenPreview() {
-    PlayerScreen("http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4") {
     }
 }

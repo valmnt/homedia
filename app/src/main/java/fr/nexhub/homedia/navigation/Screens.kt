@@ -7,4 +7,5 @@ sealed class Screens(val title: String) {
     data object ItemList: Screens("item_list")
     data object Overview: Screens("overview")
     data object Episodes: Screens("episodes")
+    data object Player: Screens("player")
 }

@@ -1,4 +1,4 @@
-package fr.nexhub.homedia.features.player.controls
+package fr.nexhub.homedia.features.player.presentation.components
 
 import androidx.annotation.IntRange
 import androidx.compose.runtime.Composable

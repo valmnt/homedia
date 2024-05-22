@@ -25,7 +25,7 @@ import fr.nexhub.homedia.features.episodes.domain.model.Episode
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun EpisodeItem(episode: Episode) {
+fun EpisodeItem(episode: Episode, onClick: () -> Unit) {
     BorderedFocusableItem(
         modifier = Modifier.padding(10.dp),
         scale =  ClickableSurfaceDefaults.scale(focusedScale = 1.03f),
@@ -33,7 +33,7 @@ fun EpisodeItem(episode: Episode) {
             containerColor = MaterialTheme.colorScheme.onSurface,
             focusedContainerColor = MaterialTheme.colorScheme.onSurface
         ),
-        onClick = { /*TODO*/ }
+        onClick = onClick
     ) {
         Row(
             modifier = Modifier

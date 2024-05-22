@@ -16,6 +16,8 @@ import fr.nexhub.homedia.features.overview.data.repository.DetailsRepositoryImpl
 import fr.nexhub.homedia.features.overview.data.repository.SeasonRepositoryImpl
 import fr.nexhub.homedia.features.overview.domain.repository.DetailsRepository
 import fr.nexhub.homedia.features.overview.domain.repository.SeasonRepository
+import fr.nexhub.homedia.features.player.data.repository.VideoUrlRepositoryImpl
+import fr.nexhub.homedia.features.player.domain.repository.VideoUrlRepository
 import fr.nexhub.homedia.features.server_registration.data.repository.ServerRegistrationRepositoryImpl
 import fr.nexhub.homedia.features.server_registration.domain.repository.ServerRegistrationRepository
 import javax.inject.Singleton
@@ -51,4 +53,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideEpisodeRepository(impl: EpisodeRepositoryImpl): EpisodeRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideVideoUrlRepository(impl: VideoUrlRepositoryImpl): VideoUrlRepository
 }

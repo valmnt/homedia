@@ -10,9 +10,10 @@ import androidx.tv.foundation.lazy.list.items
 import fr.nexhub.homedia.features.common.components.EmptyView
 import fr.nexhub.homedia.features.episodes.domain.model.Episode
 import fr.nexhub.homedia.features.episodes.presentation.components.EpisodeItem
+import java.util.UUID
 
 @Composable
-fun EpisodesContent(episodes: List<Episode>) {
+fun EpisodesContent(episodes: List<Episode>, onClick: (episodeId: UUID, title: String) -> Unit) {
     if (episodes.isEmpty()) {
         EmptyView()
     } else {
@@ -22,7 +23,7 @@ fun EpisodesContent(episodes: List<Episode>) {
                 .padding(16.dp),
         ) {
             items(episodes) { episode ->
-                EpisodeItem(episode)
+                EpisodeItem(episode) { onClick(episode.id, episode.title) }
             }
         }
     }

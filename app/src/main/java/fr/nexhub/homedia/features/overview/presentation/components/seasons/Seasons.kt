@@ -19,7 +19,7 @@ import java.util.UUID
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun Seasons(seasons: List<Season>, selectedSeason: (id: UUID) -> Unit) {
+fun Seasons(seasons: List<Season>, onSeasonClick: (id: UUID) -> Unit) {
     Box(modifier = Modifier.fillMaxSize()) {
         Row {
             Spacer(modifier = Modifier.size(220.dp))
@@ -28,7 +28,7 @@ fun Seasons(seasons: List<Season>, selectedSeason: (id: UUID) -> Unit) {
                     modifier = Modifier
                         .width(130.dp)
                         .padding(top = 20.dp, end = 10.dp),
-                    onClick = { selectedSeason(season.id) }
+                    onClick = { onSeasonClick(season.id) }
                 ) {
                     val image = season.image
                     Column {

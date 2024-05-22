@@ -13,7 +13,7 @@ import java.lang.ref.WeakReference
 @UnstableApi object PlayerFactory {
 
     fun create(
-        context: Context
+        context: Context,
     ): TLPlayer {
         val exoPlayer = ExoPlayer.Builder(context).build()
         return ExoPlayerImpl(

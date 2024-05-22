@@ -36,7 +36,12 @@ import java.util.UUID
 
 @OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun OverviewContent(item: Item, seasons: List<Season>, selectedSeason: (id: UUID) -> Unit) {
+fun OverviewContent(
+    item: Item,
+    seasons: List<Season>,
+    onSeasonClick: (id: UUID) -> Unit,
+    onPlayClick: () -> Unit
+) {
     val selectedHeader = remember {
         mutableStateOf(HeaderItems.OVERVIEW)
     }
@@ -64,12 +69,16 @@ fun OverviewContent(item: Item, seasons: List<Season>, selectedSeason: (id: UUID
                 image = item.image?.asImageBitmap() ?: ImageBitmap.imageResource(R.drawable.solid_black)
             )
             Column(modifier = Modifier.weight(.6f)) {
-                Header(item = item) {
-                    selectedHeader.value = it
-                }
+                Header(
+                    item = item,
+                    onHeaderClick = {
+                        selectedHeader.value = it
+                    },
+                    onPlayClick = onPlayClick
+                )
                 when(selectedHeader.value) {
                     HeaderItems.OVERVIEW -> Overview(item = item)
-                    HeaderItems.SEASONS -> Seasons(seasons = seasons, selectedSeason)
+                    HeaderItems.SEASONS -> Seasons(seasons = seasons, onSeasonClick)
                 }
             }
         }

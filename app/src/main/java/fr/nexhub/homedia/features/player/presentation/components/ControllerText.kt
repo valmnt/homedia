@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.player.controls
+package fr.nexhub.homedia.features.player.presentation.components
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.runtime.Composable

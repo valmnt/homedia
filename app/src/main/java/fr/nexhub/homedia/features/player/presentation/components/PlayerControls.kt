@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.player.controls
+package fr.nexhub.homedia.features.player.presentation.components
 
 import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.expandVertically
@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,6 +40,7 @@ fun PlayerControls(
     onSeek: (seekProgress: Float) -> Unit,
     contentProgressInMillis: Long,
     contentDurationInMillis: Long,
+    title: String
 ) {
     val focusRequester = remember { FocusRequester() }
 
@@ -128,13 +128,13 @@ fun PlayerControls(
                     vertical = 32.dp,
                 ),
         ) {
-            VideoHeaders()
+            VideoHeaders(title)
             Spacer(modifier = Modifier.weight(1.0f))
             Row(
                 modifier = Modifier.padding(bottom = 16.dp),
                 verticalAlignment = Alignment.CenterVertically,
             ) {
-                VideoPlayerControlsIcon(
+                 /*VideoPlayerControlsIcon(
                     icon = R.drawable.ic_auto_awesome_motion,
                     state = state,
                     isPlaying = isPlaying,
@@ -153,7 +153,7 @@ fun PlayerControls(
                     state = state,
                     isPlaying = isPlaying,
                     contentDescription = "Settings Icon",
-                )
+                )*/
             }
             Row(
                 verticalAlignment = Alignment.CenterVertically,
@@ -178,19 +178,14 @@ fun PlayerControls(
     }
 }
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
-fun VideoHeaders() {
+fun VideoHeaders(title: String) {
     Column(Modifier.fillMaxWidth()) {
         Text(
-            text = "This is Dummy video title",
+            text = title,
             color = MaterialTheme.colorScheme.onSurface,
             style = MaterialTheme.typography.headlineLarge,
-        )
-        Spacer(modifier = Modifier.height(8.dp))
-        Text(
-            text = "This is Dummy video description | acting as placeholder for details",
-            color = MaterialTheme.colorScheme.onSurface,
-            style = MaterialTheme.typography.bodySmall,
         )
     }
 }
@@ -207,11 +202,12 @@ private fun PlayerControlsPrev() {
         onSeek = {},
         contentProgressInMillis = 0,
         contentDurationInMillis = 0,
+        title = ""
     )
 }
 
 @Preview
 @Composable
 fun VideoHeadersPrev() {
-    VideoHeaders()
+    VideoHeaders("title")
 }

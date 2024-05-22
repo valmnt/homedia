@@ -1,6 +1,6 @@
 @file:OptIn(ExperimentalTvMaterial3Api::class)
 
-package fr.nexhub.homedia.features.player.controls
+package fr.nexhub.homedia.features.player.presentation.components
 
 import androidx.annotation.DrawableRes
 import androidx.compose.foundation.interaction.MutableInteractionSource
