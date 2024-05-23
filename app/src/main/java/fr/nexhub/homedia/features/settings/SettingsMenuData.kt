@@ -7,7 +7,7 @@ object SettingsMenuData {
     val menu by lazy {
         listOf(
             SettingsMenuModel("Profile", SettingsScreens.Profile.title),
-            SettingsMenuModel("About Me", SettingsScreens.AboutMe.title),
+            SettingsMenuModel("About", SettingsScreens.About.title),
         )
     }
 }

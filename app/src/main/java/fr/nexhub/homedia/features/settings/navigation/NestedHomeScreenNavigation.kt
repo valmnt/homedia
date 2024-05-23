@@ -30,7 +30,7 @@ fun NestedSettingsScreenNavigation(mainNavController: NavHostController, navCont
             }
         }
         composable(
-            SettingsScreens.AboutMe.title,
+            SettingsScreens.About.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() },
         ) {
