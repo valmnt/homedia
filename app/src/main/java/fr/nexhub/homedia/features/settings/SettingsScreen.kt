@@ -20,7 +20,7 @@ import fr.nexhub.homedia.features.settings.navigation.NestedSettingsScreenNaviga
 
 @OptIn(ExperimentalAnimationApi::class, ExperimentalTvMaterial3Api::class)
 @Composable
-fun SettingsScreen() {
+fun SettingsScreen(mainNavController: NavHostController) {
     val navController = rememberAnimatedNavController()
 
     Row(
@@ -35,17 +35,18 @@ fun SettingsScreen() {
         ) {
             navController.navigate(it.navigation)
         }
-        SettingsNavigation(navController)
+        SettingsNavigation(mainNavController, navController)
     }
 }
 
 @Composable
-fun SettingsNavigation(navController: NavHostController) {
-    NestedSettingsScreenNavigation(navController = navController)
+fun SettingsNavigation(mainNavController: NavHostController, navController: NavHostController) {
+    NestedSettingsScreenNavigation(mainNavController, navController)
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 fun SettingsScreenPrev() {
-    SettingsScreen()
+    SettingsScreen(rememberAnimatedNavController())
 }

@@ -10,16 +10,17 @@ import fr.nexhub.homedia.features.home.presentation.components.carousel.Horizont
 
 @Composable
 fun NestedHomeNavigation(
+    mainNavController: NavHostController,
     navController: NavHostController,
     state: HomeViewState,
     onItemClick: (HorizontalRowType, List<String>) -> Unit
 ) {
-    NestedHomeScreenNavigation(navController, state, onItemClick)
+    NestedHomeScreenNavigation(mainNavController, navController, state, onItemClick)
 }
 
 @OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 private fun NestedHomeNavigationPrev() {
-    NestedHomeNavigation(rememberAnimatedNavController(), HomeViewState()) { _, _ ->}
+    NestedHomeNavigation(rememberAnimatedNavController(), rememberAnimatedNavController(), HomeViewState()) { _, _ ->}
 }

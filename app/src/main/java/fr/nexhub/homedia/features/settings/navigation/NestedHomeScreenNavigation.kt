@@ -7,12 +7,14 @@ import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import fr.nexhub.homedia.features.settings.screens.about.AboutScreen
 import fr.nexhub.homedia.features.settings.screens.profile.ProfileScreen
+import fr.nexhub.homedia.navigation.Screens
+import fr.nexhub.homedia.navigation.navigateSingleTopTo
 import fr.nexhub.homedia.navigation.tabEnterTransition
 import fr.nexhub.homedia.navigation.tabExitTransition
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun NestedSettingsScreenNavigation(navController: NavHostController) {
+fun NestedSettingsScreenNavigation(mainNavController: NavHostController, navController: NavHostController) {
     AnimatedNavHost(
         navController = navController,
         startDestination = SettingsScreens.Profile.title,
@@ -23,7 +25,9 @@ fun NestedSettingsScreenNavigation(navController: NavHostController) {
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() },
         ) {
-            ProfileScreen()
+            ProfileScreen() {
+                mainNavController.navigateSingleTopTo(Screens.ServerRegistration.title)
+            }
         }
         composable(
             SettingsScreens.AboutMe.title,

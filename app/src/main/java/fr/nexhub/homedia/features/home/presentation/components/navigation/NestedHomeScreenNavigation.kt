@@ -15,6 +15,7 @@ import fr.nexhub.homedia.navigation.tabExitTransition
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun NestedHomeScreenNavigation(
+    mainNavController: NavHostController,
     navController: NavHostController,
     state: HomeViewState,
     onItemClick: (HorizontalRowType, List<String>) -> Unit
@@ -38,7 +39,7 @@ fun NestedHomeScreenNavigation(
             NestedScreens.Settings.title,
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() }) {
-            SettingsScreen()
+            SettingsScreen(mainNavController)
         }
     }
 }

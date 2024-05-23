@@ -6,6 +6,7 @@ import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
 import fr.nexhub.homedia.features.home.presentation.components.navigation.NestedHomeNavigation
@@ -16,6 +17,7 @@ import fr.nexhub.homedia.theme.HomediaTheme
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun HomeContent(
+    mainNavController: NavHostController,
     state: HomeViewState,
     onItemClick: (HorizontalRowType, List<String>) -> Unit
 ) {
@@ -32,16 +34,17 @@ fun HomeContent(
     }
 
     HomeTopBar(content = {
-        NestedHomeNavigation(navController, state, onItemClick)
+        NestedHomeNavigation(mainNavController, navController, state, onItemClick)
     }, selectedId = selectedId.value) {
         navController.navigate(it.id)
     }
 }
 
+@OptIn(ExperimentalAnimationApi::class)
 @Preview
 @Composable
 fun HomeScreenContentPrev() {
     HomediaTheme {
-        HomeContent(HomeViewState()) { _, _ -> }
+        HomeContent(rememberAnimatedNavController(), HomeViewState()) { _, _ -> }
     }
 }

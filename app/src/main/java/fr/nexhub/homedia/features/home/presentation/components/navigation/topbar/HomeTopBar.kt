@@ -76,13 +76,13 @@ fun HomeTopBar(
                         )
                     }
                 }
-                NavigationTabItem(
+                /*NavigationTabItem(
                     item = searchItem,
                     isSelected = selectedId == searchItem.id,
                     onMenuSelected = {
                         onMenuSelected?.invoke(searchItem)
                     }
-                )
+                )*/
 
                 NavigationTabItem(item = MenuData.settingsItem,
                     isSelected = selectedId == MenuData.settingsItem.id,

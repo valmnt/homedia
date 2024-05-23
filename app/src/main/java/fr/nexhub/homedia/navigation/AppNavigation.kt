@@ -43,7 +43,7 @@ fun AppNavigation(navController: NavHostController, startDestination: String) {
         composable(
             Screens.Home.title
         ) {
-            HomeScreen { horizontalRowType, args ->
+            HomeScreen(mainNavController = navController) { horizontalRowType, args ->
                 when(horizontalRowType) {
                     HorizontalRowType.LIBRARIES -> {
                         navController.navigate("${Screens.ItemList.title}/${args[0]}/${args[1]}")
