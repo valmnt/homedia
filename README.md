@@ -1,29 +1,35 @@
 # Homedia
 
+## Description
+
+This repository hosts a third-party native application for Jellyfin on Android TV, developed using Jetpack Compose and Clean Architecture principles. 
+Jellyfin is an open-source media server, and this application aims to provide an optimized and intuitive interface for Android TV users.
+
+This project is a fork of the original repository created by Umair Khalid, available at: [Original Repository](https://github.com/UmairKhalid786/ComposeTv).
+
 ## Top features 
-### Who is Watching
-![Screenshot_20230819_235634](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/8006239f-d080-4610-bf73-22d026b81109)
+### Home
 
-### Search
-![Screenshot_20230913_002726](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/50ea76e5-ae63-4769-b978-a2cf3882670b)
+<img width="1198" src="https://github.com/valmnt/homedia/assets/46025586/0110263c-ffcf-4477-8c38-4d0db88fd5be">
 
-### Songs
-![songs](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/90d867c4-b683-4ae5-ae57-bf65f9d7a68c)
+### Items
 
-### Audio Player
-![songs_player](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/a0d4a3c5-4d3e-42d4-bfa2-bad2d5d7097c)
+<img width="400" src="https://github.com/valmnt/homedia/assets/46025586/48432d13-7380-4b00-a8cc-4bfc39e52ea9">
+<img width="400" src="https://github.com/valmnt/homedia/assets/46025586/6a9c4808-fff3-424b-9af4-976e6da08519">
 
-### New Menu
-![Screenshot_20231022_204037](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/5d2ef3f7-7ec4-41a0-a8db-8fc93bab261e)
+### Item
 
-### Options to toggle Top Bar
-![Screenshot_20231022_204109](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/0aaaaa0b-776a-42fa-b872-a5db716e95eb)
+<img width="250" src="https://github.com/valmnt/homedia/assets/46025586/e57550c6-7ff6-45a7-9e90-1b8c52507bc3">
+<img width="250" src="https://github.com/valmnt/homedia/assets/46025586/a8861979-6a3e-4449-ad37-c3b6e915259d">
+<img width="250" src="https://github.com/valmnt/homedia/assets/46025586/5ea14725-2e65-43b0-86b3-74404e23ecba">
 
-### New Home
-![Screenshot_20231022_204129](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/3ddb3b14-d617-49c9-8e9f-79e3b3e47c12)
+### Player
 
-### Screenshots
-![ns](https://github.com/UmairKhalid786/ComposeTv/assets/21205138/7f2d9334-e1f8-475f-a955-91c60d6f8a7a)
+https://github.com/valmnt/homedia/assets/46025586/be43276e-d45e-4a30-bb72-42e35c33d580
+
+### Overview
+
+![overview(1)](https://github.com/valmnt/homedia/assets/46025586/1e1fc664-3eb1-49b6-a4f1-860497ac505c)
 
 ## Special Guidlines for Hacktoberfest
 
