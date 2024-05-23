@@ -5,6 +5,7 @@ import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.EmptyView
 import fr.nexhub.homedia.features.home.presentation.HomeViewState
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HomeCarousel
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
@@ -25,6 +26,6 @@ fun HomeNestedScreen(
             )
         }
     } else {
-
+        EmptyView()
     }
 }
