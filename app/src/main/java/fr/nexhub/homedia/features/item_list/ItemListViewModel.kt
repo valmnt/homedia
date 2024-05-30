@@ -3,18 +3,17 @@ package fr.nexhub.homedia.features.item_list
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.nexhub.homedia.features.common.item.domain.repository.ItemRepository
+import fr.nexhub.homedia.features.common.item.domain.usecase.GetItemsUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class ItemListViewModel @Inject constructor(
-    private val itemRepository: ItemRepository
+    private val getItemsUseCase: GetItemsUseCase
 ): ViewModel() {
 
     private val _state = MutableStateFlow(ItemListViewState())
@@ -22,18 +21,9 @@ class ItemListViewModel @Inject constructor(
 
     fun getItemsFromLibrary(libraryId: UUID) {
         viewModelScope.launch {
-            itemRepository.getItems(libraryId, null)
-            .onRight { items ->
-                _state.update {
-                    it.copy(items = items, isLoading = false)
-                }
-                items.forEach { Timber.tag("GET_ITEM_LIST").d(it.title) }
-            }
-            .onLeft { error ->
-                _state.update {
-                    it.copy(isLoading = false)
-                }
-                Timber.tag("GET_ITEM_LIST_ERROR").d(error.t?.message ?: "")
+            val (items, error) = getItemsUseCase.execute(libraryId, null)
+            _state.update {
+                it.copy(isLoading = false, error = error, items = items)
             }
         }
     }

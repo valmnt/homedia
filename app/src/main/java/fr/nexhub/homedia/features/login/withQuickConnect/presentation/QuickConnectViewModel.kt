@@ -3,7 +3,8 @@ package fr.nexhub.homedia.features.login.withQuickConnect.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.nexhub.homedia.features.login.withQuickConnect.domain.repository.QuickConnectRepository
+import fr.nexhub.homedia.features.login.withQuickConnect.domain.usecase.AuthenticateUseCase
+import fr.nexhub.homedia.features.login.withQuickConnect.domain.usecase.ConnectUseCase
 import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.managers.PreferencesManager
 import kotlinx.coroutines.CoroutineScope
@@ -22,7 +23,8 @@ import javax.inject.Inject
 
 @HiltViewModel
 class QuickConnectViewModel @Inject constructor(
-    private val quickConnectRepository: QuickConnectRepository,
+    private val connectUseCase: ConnectUseCase,
+    private val authenticateUseCase: AuthenticateUseCase,
     private val preferencesManager: PreferencesManager,
 ): ViewModel() {
 
@@ -31,7 +33,7 @@ class QuickConnectViewModel @Inject constructor(
 
     fun authenticate(authHasSucceeded: () -> Unit) {
         viewModelScope.launch {
-            quickConnectRepository.initiate()
+            authenticateUseCase.execute()
             .onRight { quickConnectState ->
                 _state.update { quickConnectViewState ->
                     quickConnectViewState.copy(
@@ -53,7 +55,7 @@ class QuickConnectViewModel @Inject constructor(
     }
 
     private suspend fun connect(quickConnectState: Response<QuickConnectResult>, authHasSucceeded: () -> Unit) {
-        quickConnectRepository.connect(secret = quickConnectState.content.secret) { secret, status ->
+        connectUseCase.execute(secret = quickConnectState.content.secret) { secret, status ->
             val scope = CoroutineScope(Dispatchers.Default)
             scope.launch {
                 val authenticationResult by JellyfinManager.api.userApi.authenticateWithQuickConnect(

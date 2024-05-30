@@ -17,9 +17,9 @@ fun EpisodesScreen(itemId: UUID, seasonId: UUID, onClick: (episodeId: UUID, titl
     if (state.isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
         viewModel.getEpisodes(itemId, seasonId)
-    } else if (state.episodes != null) {
-        EpisodesContent(episodes = state.episodes!!, onClick)
-    } else {
+    } else if (state.error != null) {
         ErrorView()
+    } else {
+        EpisodesContent(episodes = state.episodes, onClick)
     }
 }

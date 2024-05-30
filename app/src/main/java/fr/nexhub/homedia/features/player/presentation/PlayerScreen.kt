@@ -19,15 +19,15 @@ fun PlayerScreen(itemId: UUID, title: String, onBackPressed: () -> Unit) {
     if (state.isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
         viewModel.getVideoUrl(itemId)
-    } else if (state.url != null) {
+    } else if (state.error != null || state.url.isNullOrEmpty()) {
+        ErrorView()
+    } else {
         PlayerContent(
             modifier = Modifier.fillMaxSize(),
             title= title,
             mediaUrl = state.url!!,
             onBackPressed,
         )
-    } else {
-        ErrorView()
     }
 }
 

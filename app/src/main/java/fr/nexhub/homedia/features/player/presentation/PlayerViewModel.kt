@@ -3,18 +3,17 @@ package fr.nexhub.homedia.features.player.presentation
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.nexhub.homedia.features.player.domain.repository.VideoUrlRepository
+import fr.nexhub.homedia.features.player.domain.usecase.GetVideoUrlUseCase
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import timber.log.Timber
 import java.util.UUID
 import javax.inject.Inject
 
 @HiltViewModel
 class PlayerViewModel @Inject constructor(
-    private val videoUrlRepository: VideoUrlRepository
+    private val getVideoUrlUseCase: GetVideoUrlUseCase
 ): ViewModel() {
 
     private val _state = MutableStateFlow(PlayerViewState())
@@ -22,18 +21,9 @@ class PlayerViewModel @Inject constructor(
 
     fun getVideoUrl(id: UUID) {
         viewModelScope.launch {
-            videoUrlRepository.getVideoUrl(id)
-            .onRight { url ->
-                _state.update {
-                    it.copy(isLoading = false, url = url)
-                }
-                Timber.tag("GET_VIDEO_URL").d(url)
-            }
-            .onLeft { error ->
-                _state.update {
-                    it.copy(isLoading = false)
-                }
-                Timber.tag("GET_VIDEO_URL_ERROR").d(error.t?.message ?: "")
+            val (url, error) = getVideoUrlUseCase.execute(id)
+            _state.update {
+                it.copy(isLoading = false, error = error, url = url)
             }
         }
     }

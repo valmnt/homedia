@@ -25,6 +25,8 @@ fun OverviewScreen(
     if (state.isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
         viewModel.getDetails(itemId)
+    } else if (state.error != null) {
+        ErrorView()
     } else if (state.item != null) {
         OverviewContent(
             state.item!!,
@@ -36,8 +38,6 @@ fun OverviewScreen(
                 onPlayClick(state.item!!.title)
             }
         )
-    } else {
-        ErrorView()
     }
 }
 

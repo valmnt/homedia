@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
-import fr.nexhub.homedia.features.server_registration.domain.repository.ServerRegistrationRepository
+import fr.nexhub.homedia.features.server_registration.domain.usecase.PingUseCase
 import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.utils.JellyfinAPIConstants
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -16,7 +16,7 @@ import javax.inject.Inject
 
 @HiltViewModel
 class ServerRegistrationViewModel @Inject constructor(
-    private val serverRepository: ServerRegistrationRepository,
+    private val pingUseCase: PingUseCase
 ): ViewModel() {
 
     private val _state = MutableStateFlow(ServerRegistrationViewState())
@@ -28,7 +28,7 @@ class ServerRegistrationViewModel @Inject constructor(
             _state.update {
                 it.copy(isLoading = true)
             }
-            serverRepository.ping(baseUrl + JellyfinAPIConstants.PING)
+            pingUseCase.execute(baseUrl + JellyfinAPIConstants.PING)
             .onRight {
                 _state.update {
                     it.copy(isLoading = false)

@@ -6,6 +6,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
 import fr.nexhub.homedia.features.common.components.EmptyView
+import fr.nexhub.homedia.features.common.components.ErrorView
 import fr.nexhub.homedia.features.home.presentation.HomeViewState
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HomeCarousel
 import fr.nexhub.homedia.features.home.presentation.components.carousel.HorizontalRowType
@@ -17,7 +18,11 @@ fun HomeNestedScreen(
 ) {
     if (state.isLoading) {
         CircularProgressIndicator(modifier = Modifier.fillMaxSize())
-    } else if (state.libraries != null) {
+    } else if (state.error != null) {
+        ErrorView()
+    } else if (state.libraries.isEmpty()) {
+        EmptyView()
+    } else {
         Column(Modifier.fillMaxSize()) {
             HomeCarousel(
                 Modifier.weight(1f),
@@ -25,7 +30,5 @@ fun HomeNestedScreen(
                 onItemClick = onItemClick,
             )
         }
-    } else {
-        EmptyView()
     }
 }

@@ -4,7 +4,7 @@ import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
-import fr.nexhub.homedia.features.server_registration.data.remote.ServerAPI
+import fr.nexhub.homedia.features.server_registration.data.datasource.ServerRegistrationDataSource
 import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Singleton
@@ -15,12 +15,12 @@ object ApiModule {
 
     @Singleton
     @Provides
-    fun provideServerApi(): ServerAPI {
+    fun provideServerApi(): ServerRegistrationDataSource {
         return Retrofit
             .Builder()
             .baseUrl("https://localhost/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-            .create(ServerAPI::class.java)
+            .create(ServerRegistrationDataSource::class.java)
     }
 }

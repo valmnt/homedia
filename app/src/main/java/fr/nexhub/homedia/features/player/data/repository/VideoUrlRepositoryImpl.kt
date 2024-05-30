@@ -1,28 +1,27 @@
 package fr.nexhub.homedia.features.player.data.repository
 
 import arrow.core.Either
-import arrow.core.left
-import arrow.core.right
+import fr.nexhub.homedia.features.player.data.datasource.RemoteVideoUrlDataSource
 import fr.nexhub.homedia.features.player.domain.repository.VideoUrlRepository
-import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.network.error.NetworkError
-import fr.nexhub.homedia.network.toGeneralError
-import org.jellyfin.sdk.api.client.exception.InvalidStatusException
-import org.jellyfin.sdk.api.client.extensions.videosApi
+import timber.log.Timber
 import java.util.UUID
 import javax.inject.Inject
 
-class VideoUrlRepositoryImpl @Inject constructor(): VideoUrlRepository {
+class VideoUrlRepositoryImpl @Inject constructor(
+    private val remoteDataSource: RemoteVideoUrlDataSource
+): VideoUrlRepository {
 
-    override suspend fun getVideoUrl(id: UUID): Either<NetworkError, String> {
-        return try {
-            val url = JellyfinManager.api.videosApi.getVideoStreamUrl(
-                itemId = id,
-                static = true
-            )
-            url.right()
-        } catch (err: InvalidStatusException) {
-            err.toGeneralError().left()
+    override suspend fun getVideoUrl(id: UUID): Pair<String?, NetworkError?> {
+        return when (val result = remoteDataSource.getVideoUrl(id)) {
+            is Either.Right -> {
+                Timber.tag("GET_VIDEO_URL").d(result.value)
+                result.value to null
+            }
+            is Either.Left -> {
+                Timber.tag("GET_VIDEO_URL_ERROR").d(result.value.t?.message ?: "")
+                null to result.value
+            }
         }
     }
 }
