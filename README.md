@@ -7,6 +7,8 @@ Jellyfin is an open-source media server, and this application aims to provide an
 
 This project is a fork of the original repository created by Umair Khalid, available at: [Original Repository](https://github.com/UmairKhalid786/ComposeTv).
 
+*Please note that the application is currently in alpha and still under development.*
+
 ## Top features 
 ### Home
 
