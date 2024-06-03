@@ -9,7 +9,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.AnimatedBarsLoader
 
 @Composable
 fun ServerRegistrationScreen(modifier: Modifier = Modifier, goToScreen: () -> Unit) {
@@ -18,7 +18,7 @@ fun ServerRegistrationScreen(modifier: Modifier = Modifier, goToScreen: () -> Un
     val context = LocalContext.current
 
     if (state.isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+        AnimatedBarsLoader(modifier = Modifier.fillMaxSize())
     } else {
         Box(
             modifier = modifier

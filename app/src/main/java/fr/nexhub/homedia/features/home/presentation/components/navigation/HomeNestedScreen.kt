@@ -4,7 +4,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.AnimatedBarsLoader
 import fr.nexhub.homedia.features.common.components.EmptyView
 import fr.nexhub.homedia.features.common.components.ErrorView
 import fr.nexhub.homedia.features.home.presentation.HomeViewState
@@ -17,7 +17,7 @@ fun HomeNestedScreen(
     onItemClick: (HorizontalRowType, List<String>) -> Unit
 ) {
     if (state.isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+        AnimatedBarsLoader(modifier = Modifier.fillMaxSize())
     } else if (state.error != null) {
         ErrorView()
     } else if (state.libraries.isEmpty()) {

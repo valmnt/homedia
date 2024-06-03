@@ -30,7 +30,7 @@ fun SettingsScreen(mainNavController: NavHostController) {
         SettingsMenu(
             modifier = Modifier
                 .fillMaxHeight()
-                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.2f))
+                .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.1f))
                 .padding(vertical = 32.dp, horizontal = 16.dp),
         ) {
             navController.navigate(it.navigation)

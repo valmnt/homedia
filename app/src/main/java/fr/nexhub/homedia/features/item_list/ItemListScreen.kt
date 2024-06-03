@@ -7,7 +7,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.AnimatedBarsLoader
 import fr.nexhub.homedia.features.common.components.EmptyView
 import fr.nexhub.homedia.features.common.components.ErrorView
 import java.util.UUID
@@ -17,7 +17,7 @@ fun ItemListScreen(id: UUID, title: String, onItemFocus: (itemId: UUID) -> Unit)
     val viewModel: ItemListViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
     if (state.isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+        AnimatedBarsLoader(modifier = Modifier.fillMaxSize())
         viewModel.getItemsFromLibrary(id)
     } else if (state.error != null) {
         ErrorView()

@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.AnimatedBarsLoader
 
 @Composable
 fun QuickConnectScreen(modifier: Modifier = Modifier, goToScreen: () -> Unit) {
@@ -15,7 +15,7 @@ fun QuickConnectScreen(modifier: Modifier = Modifier, goToScreen: () -> Unit) {
     
     if (state.status == null) {
         viewModel.authenticate(goToScreen)
-        CircularProgressIndicator(modifier = modifier.fillMaxSize())
+        AnimatedBarsLoader(modifier = modifier.fillMaxSize())
     } else {
         state.status?.let { status ->
             QuickConnectContent(

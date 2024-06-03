@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.aspectRatio
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -17,7 +16,6 @@ import androidx.compose.ui.graphics.asImageBitmap
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
-import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.features.common.components.BorderedFocusableItem
@@ -54,10 +52,6 @@ fun CardCarouselForRecentItemInLibrary(
     BorderedFocusableItem(
         onClick = { onItemClick(HorizontalRowType.RECENT_ITEMS, listOf(id.toString())) },
         borderRadius = 12.dp,
-        color = ClickableSurfaceDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.onSurface,
-            focusedContainerColor = MaterialTheme.colorScheme.onSurface
-        ),
         modifier = modifier
             .padding(horizontal = 8.dp)
             .aspectRatio(1.8f)

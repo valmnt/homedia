@@ -8,7 +8,6 @@ import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -20,6 +19,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import fr.nexhub.homedia.features.common.components.BorderedFocusableItem
 import fr.nexhub.homedia.features.episodes.domain.model.Episode
 
@@ -30,8 +30,7 @@ fun EpisodeItem(episode: Episode, onClick: () -> Unit) {
         modifier = Modifier.padding(10.dp),
         scale =  ClickableSurfaceDefaults.scale(focusedScale = 1.03f),
         color = ClickableSurfaceDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.onSurface,
-            focusedContainerColor = MaterialTheme.colorScheme.onSurface
+            focusedContainerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
         ),
         onClick = onClick
     ) {
@@ -60,7 +59,7 @@ fun EpisodeItem(episode: Episode, onClick: () -> Unit) {
                     text = episode.title,
                     fontSize = 16.sp,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colorScheme.onPrimary,
+                    color = MaterialTheme.colorScheme.primary,
                     fontWeight = FontWeight.Bold
                 )
                 Spacer(modifier = Modifier.height(10.dp))
@@ -70,7 +69,7 @@ fun EpisodeItem(episode: Episode, onClick: () -> Unit) {
                     text = episode.overview ?: "",
                     fontSize = 16.sp,
                     overflow = TextOverflow.Ellipsis,
-                    color = MaterialTheme.colorScheme.onPrimary
+                    color = MaterialTheme.colorScheme.primary,
                 )
             }
         }

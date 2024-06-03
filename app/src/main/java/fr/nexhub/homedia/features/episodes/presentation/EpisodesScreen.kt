@@ -6,7 +6,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.hilt.navigation.compose.hiltViewModel
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.AnimatedBarsLoader
 import fr.nexhub.homedia.features.common.components.ErrorView
 import java.util.UUID
 
@@ -15,7 +15,7 @@ fun EpisodesScreen(itemId: UUID, seasonId: UUID, onClick: (episodeId: UUID, titl
     val viewModel: EpisodesViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
     if (state.isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+        AnimatedBarsLoader(modifier = Modifier.fillMaxSize())
         viewModel.getEpisodes(itemId, seasonId)
     } else if (state.error != null) {
         ErrorView()

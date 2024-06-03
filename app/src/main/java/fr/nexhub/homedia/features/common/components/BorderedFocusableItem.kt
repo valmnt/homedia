@@ -6,7 +6,6 @@ import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -19,6 +18,7 @@ import androidx.tv.material3.ClickableSurfaceDefaults
 import androidx.tv.material3.ClickableSurfaceScale
 import androidx.tv.material3.ClickableSurfaceShape
 import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
 
@@ -28,16 +28,16 @@ fun BorderedFocusableItem(
     borderRadius: Dp = 12.dp,
     scale: ClickableSurfaceScale = ClickableSurfaceDefaults.scale(focusedScale = 1.1f),
     color: ClickableSurfaceColors = ClickableSurfaceDefaults.colors(
-        containerColor = colorScheme.onSurface,
-        focusedContainerColor = colorScheme.surface,
-        contentColor = colorScheme.surface,
-        focusedContentColor = colorScheme.onSurface
+        containerColor = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f),
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        focusedContainerColor = MaterialTheme.colorScheme.onSurface,
+        focusedContentColor = MaterialTheme.colorScheme.surface
     ),
     border: ClickableSurfaceBorder = ClickableSurfaceDefaults.border(
         focusedBorder = Border(
             BorderStroke(
                 width = 2.dp,
-                color = colorScheme.surface
+                color = MaterialTheme.colorScheme.onSurface
             ),
             shape = RoundedCornerShape(borderRadius)
         )

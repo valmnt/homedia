@@ -4,10 +4,14 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.animation.ExperimentalAnimationApi
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.remember
+import androidx.compose.ui.Modifier
 import androidx.navigation.NavHostController
+import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme.colorScheme
 import com.google.accompanist.navigation.animation.rememberAnimatedNavController
 import dagger.hilt.android.AndroidEntryPoint
 import fr.nexhub.homedia.managers.JellyfinManager
@@ -19,24 +23,15 @@ import java.util.UUID
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    @OptIn(ExperimentalAnimationApi::class)
+    @OptIn(ExperimentalAnimationApi::class, ExperimentalTvMaterial3Api::class)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        
         setContent {
-            val displayDialog = remember {
-                mutableStateOf(false)
-            }
-
-            App(navController = rememberAnimatedNavController())
-
-            registerOnBackPress {
-                displayDialog.value = true
-            }
-
-            if (displayDialog.value) {
-                CustomDialog(openDialogCustom = displayDialog) {
-                    finish()
+            HomediaTheme {
+                Box(modifier = Modifier
+                    .fillMaxSize()
+                    .background(color = colorScheme.background)) {
+                    App(navController = rememberAnimatedNavController())
                 }
             }
         }
@@ -61,8 +56,6 @@ class MainActivity : ComponentActivity() {
             )
         }
 
-        HomediaTheme {
-            AppNavigation(navController, startDestination)
-        }
+        AppNavigation(navController, startDestination)
     }
 }

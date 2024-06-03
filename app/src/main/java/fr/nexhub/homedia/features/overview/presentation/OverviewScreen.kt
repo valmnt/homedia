@@ -8,7 +8,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Devices
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.hilt.navigation.compose.hiltViewModel
-import fr.nexhub.homedia.features.common.components.CircularProgressIndicator
+import fr.nexhub.homedia.features.common.components.AnimatedBarsLoader
 import fr.nexhub.homedia.features.common.components.ErrorView
 import fr.nexhub.homedia.theme.HomediaTheme
 import java.util.UUID
@@ -23,7 +23,7 @@ fun OverviewScreen(
     val viewModel: OverviewViewModel = hiltViewModel()
     val state by viewModel.state.collectAsState()
     if (state.isLoading) {
-        CircularProgressIndicator(modifier = Modifier.fillMaxSize())
+        AnimatedBarsLoader(modifier = Modifier.fillMaxSize())
         viewModel.getDetails(itemId)
     } else if (state.error != null) {
         ErrorView()

@@ -4,7 +4,6 @@ package fr.nexhub.homedia.features.common.components
 
 import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.material3.MaterialTheme.colorScheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
@@ -16,6 +15,7 @@ import androidx.tv.material3.ClickableSurfaceScale
 import androidx.tv.material3.ClickableSurfaceShape
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.Glow
+import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.ShapeDefaults
 import androidx.tv.material3.Surface
 import androidx.tv.material3.Text
@@ -29,15 +29,15 @@ fun FocusableItem(
         focusedShape = ShapeDefaults.Small
     ),
     color: ClickableSurfaceColors = ClickableSurfaceDefaults.colors(
-        containerColor = colorScheme.onSurface,
-        focusedContainerColor = colorScheme.surface,
-        contentColor = colorScheme.surface,
-        focusedContentColor = colorScheme.onSurface
+        containerColor = MaterialTheme.colorScheme.surface,
+        contentColor = MaterialTheme.colorScheme.onSurface,
+        focusedContainerColor = MaterialTheme.colorScheme.onSurface,
+        focusedContentColor = MaterialTheme.colorScheme.surface
     ),
     glow: ClickableSurfaceGlow = ClickableSurfaceDefaults.glow(
         focusedGlow = Glow(
             elevation = 5.dp,
-            elevationColor = colorScheme.surface.copy(alpha = 0.5f)
+            elevationColor = MaterialTheme.colorScheme.surface.copy(alpha = 0.5f)
         )
     ),
     scale: ClickableSurfaceScale = ClickableSurfaceDefaults.scale(focusedScale = 1.1f),
