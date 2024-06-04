@@ -38,8 +38,8 @@ fun AnimatedBars(
     modifier: Modifier = Modifier,
     barCount: Int = 5,
     colors: Array<Color> = allIconColors,
-    barWidth: Dp = 20.dp,
-    maxHeight: Dp = 100.dp,
+    barWidth: Dp = 15.dp,
+    maxHeight: Dp = 70.dp,
     cornerRadius: Dp = 8.dp
 ) {
     val infiniteTransition = rememberInfiniteTransition(label = "InfiniteTransition")
