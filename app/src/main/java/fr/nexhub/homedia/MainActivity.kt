@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
     @Composable
     fun App(navController: NavHostController) {
         val preferencesManager = PreferencesManager(context = applicationContext)
-        val accessToken = preferencesManager.getData("ACCESS_TOKEN", "")
+        val accessToken = preferencesManager.getData("ACCESS_TOKEN", true)
         val startDestination: String
 
         if (accessToken.isEmpty()) {
@@ -50,8 +50,8 @@ class MainActivity : ComponentActivity() {
 
             JellyfinManager.initSDK(
                 currentContext = applicationContext,
-                baseUrl = preferencesManager.getData("BASE_URL", ""),
-                userId = UUID.fromString(preferencesManager.getData("USER_ID", "")),
+                baseUrl = preferencesManager.getData("BASE_URL"),
+                userId = UUID.fromString(preferencesManager.getData("USER_ID")),
                 accessToken = accessToken
             )
         }

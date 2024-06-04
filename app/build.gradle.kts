@@ -63,6 +63,7 @@ dependencies {
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
+    implementation(libs.androidx.security.crypto)
 
     implementation(platform(libs.compose.bom))
     implementation(libs.bundles.androidx.compose.bom)
@@ -70,6 +71,7 @@ dependencies {
     implementation(libs.bundles.compose.accompanist)
 
     implementation(libs.hilt.android)
+
     kapt(libs.hilt.android.compiler)
     implementation(libs.androidx.hilt.navigation.compose)
 

@@ -76,7 +76,7 @@ class QuickConnectViewModel @Inject constructor(
     private fun storeAccessToken(authenticationResult: AuthenticationResult) {
         JellyfinManager.api.accessToken = authenticationResult.accessToken
         authenticationResult.accessToken?.let {
-            preferencesManager.saveData("ACCESS_TOKEN", it)
+            preferencesManager.saveData("ACCESS_TOKEN", it, true)
         }
     }
 
