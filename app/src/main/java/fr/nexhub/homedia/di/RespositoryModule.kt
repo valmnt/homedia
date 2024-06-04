@@ -20,6 +20,8 @@ import fr.nexhub.homedia.features.player.data.repository.VideoUrlRepositoryImpl
 import fr.nexhub.homedia.features.player.domain.repository.VideoUrlRepository
 import fr.nexhub.homedia.features.server_registration.data.repository.ServerRegistrationRepositoryImpl
 import fr.nexhub.homedia.features.server_registration.domain.repository.ServerRegistrationRepository
+import fr.nexhub.homedia.features.settings.screens.profile.data.repository.UserRepositoryImpl
+import fr.nexhub.homedia.features.settings.screens.profile.domain.repository.UserRepository
 import javax.inject.Singleton
 
 @Module
@@ -57,4 +59,8 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun provideVideoUrlRepository(impl: VideoUrlRepositoryImpl): VideoUrlRepository
+
+    @Binds
+    @Singleton
+    abstract fun provideUserRepository(impl: UserRepositoryImpl): UserRepository
 }

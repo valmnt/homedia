@@ -20,6 +20,7 @@ import fr.nexhub.homedia.features.episodes.domain.model.Episode
 import fr.nexhub.homedia.features.home.domain.model.Library
 import fr.nexhub.homedia.features.overview.domain.model.Details
 import fr.nexhub.homedia.features.overview.domain.model.Season
+import fr.nexhub.homedia.features.settings.screens.profile.domain.model.User
 import fr.nexhub.homedia.managers.JellyfinManager
 import fr.nexhub.homedia.network.error.NetworkError
 import fr.nexhub.homedia.network.toGeneralError
@@ -33,6 +34,7 @@ import org.jellyfin.sdk.api.client.exception.InvalidStatusException
 import org.jellyfin.sdk.api.client.extensions.imageApi
 import org.jellyfin.sdk.model.api.BaseItemDto
 import org.jellyfin.sdk.model.api.ImageType
+import org.jellyfin.sdk.model.api.UserDto
 
 fun <T> StateFlow<T>.toMutable() = this as MutableStateFlow
 
@@ -156,5 +158,12 @@ fun BaseItemDto.toEpisode(image: Bitmap?): Episode {
         title = this.name ?: "???",
         image = image,
         overview = this.overview
+    )
+}
+
+fun UserDto.toUser(): User {
+    return User(
+        name = this.name ?: "Unknown",
+        lastActivityDate = this.lastActivityDate
     )
 }

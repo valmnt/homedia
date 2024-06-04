@@ -6,15 +6,13 @@ import androidx.navigation.NavHostController
 import com.google.accompanist.navigation.animation.AnimatedNavHost
 import com.google.accompanist.navigation.animation.composable
 import fr.nexhub.homedia.features.settings.screens.about.AboutScreen
-import fr.nexhub.homedia.features.settings.screens.profile.ProfileScreen
-import fr.nexhub.homedia.navigation.Screens
-import fr.nexhub.homedia.navigation.navigateSingleTopTo
+import fr.nexhub.homedia.features.settings.screens.profile.presentation.ProfileScreen
 import fr.nexhub.homedia.navigation.tabEnterTransition
 import fr.nexhub.homedia.navigation.tabExitTransition
 
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
-fun NestedSettingsScreenNavigation(mainNavController: NavHostController, navController: NavHostController) {
+fun NestedSettingsScreenNavigation(navController: NavHostController) {
     AnimatedNavHost(
         navController = navController,
         startDestination = SettingsScreens.Profile.title,
@@ -25,9 +23,7 @@ fun NestedSettingsScreenNavigation(mainNavController: NavHostController, navCont
             enterTransition = { tabEnterTransition() },
             exitTransition = { tabExitTransition() },
         ) {
-            ProfileScreen() {
-                mainNavController.navigateSingleTopTo(Screens.ServerRegistration.title)
-            }
+            ProfileScreen()
         }
         composable(
             SettingsScreens.About.title,

@@ -12,6 +12,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
@@ -21,6 +22,7 @@ import fr.nexhub.homedia.features.settings.navigation.NestedSettingsScreenNaviga
 @OptIn(ExperimentalAnimationApi::class, ExperimentalTvMaterial3Api::class)
 @Composable
 fun SettingsScreen(mainNavController: NavHostController) {
+    val viewModel: SettingsViewModel = hiltViewModel()
     val navController = rememberAnimatedNavController()
 
     Row(
@@ -33,15 +35,21 @@ fun SettingsScreen(mainNavController: NavHostController) {
                 .background(MaterialTheme.colorScheme.surface.copy(alpha = 0.1f))
                 .padding(vertical = 32.dp, horizontal = 16.dp),
         ) {
-            navController.navigate(it.navigation)
+            when (it.text) {
+                SettingsMenuDataItem.Logout.name -> {
+                    viewModel.logout()
+                    mainNavController.navigate(it.navigation)
+                }
+                else -> navController.navigate(it.navigation)
+            }
         }
-        SettingsNavigation(mainNavController, navController)
+        SettingsNavigation(navController)
     }
 }
 
 @Composable
-fun SettingsNavigation(mainNavController: NavHostController, navController: NavHostController) {
-    NestedSettingsScreenNavigation(mainNavController, navController)
+fun SettingsNavigation(navController: NavHostController) {
+    NestedSettingsScreenNavigation(navController)
 }
 
 @OptIn(ExperimentalAnimationApi::class)
