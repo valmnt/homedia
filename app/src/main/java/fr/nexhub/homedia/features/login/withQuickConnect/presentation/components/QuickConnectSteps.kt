@@ -7,6 +7,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.Dp
 import androidx.tv.material3.ExperimentalTvMaterial3Api
+import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 
 @Composable
@@ -24,6 +25,6 @@ fun QuickConnectStep(text: String, spaceBetweenSteps: Dp) {
     Spacer(Modifier.size(spaceBetweenSteps))
     Text(
         text = text,
-        color = androidx.compose.material3.MaterialTheme.colorScheme.surface
+        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
     )
 }
