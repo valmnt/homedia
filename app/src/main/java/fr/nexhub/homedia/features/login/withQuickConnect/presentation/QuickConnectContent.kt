@@ -1,24 +1,32 @@
 package fr.nexhub.homedia.features.login.withQuickConnect.presentation
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxHeight
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.width
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.tv.material3.ButtonDefaults
 import androidx.tv.material3.ExperimentalTvMaterial3Api
 import androidx.tv.material3.MaterialTheme
 import androidx.tv.material3.Text
 import fr.nexhub.homedia.R
+import fr.nexhub.homedia.features.common.components.TvButton
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.components.QuickConnectSteps
 import fr.nexhub.homedia.features.login.withQuickConnect.presentation.components.QuickConnectTitle
 
+@OptIn(ExperimentalTvMaterial3Api::class)
 @Composable
 fun QuickConnectContent(status: Int, code: String?) {
     Box (
@@ -32,6 +40,34 @@ fun QuickConnectContent(status: Int, code: String?) {
                 in 200..299 -> code?.let { QuickConnectEnabled(code = it) }
                 401 -> QuickConnectDisabled()
                 else -> QuickConnectError()
+            }
+            Box(
+                modifier = Modifier
+                    .fillMaxHeight(),
+                contentAlignment = Alignment.BottomCenter
+            ) {
+                Row(
+                    modifier = Modifier
+                        .padding(bottom = 20.dp),
+                    verticalAlignment = Alignment.CenterVertically,
+                ) {
+                    Text(
+                        text = "${stringResource(R.string.other_options)}:",
+                        color = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f)
+                    )
+                    Spacer(modifier = Modifier.width(10.dp))
+                    TvButton(
+                        colors = ButtonDefaults.colors(
+                            contentColor = MaterialTheme.colorScheme.primary.copy(alpha = 0.7f),
+                            focusedContentColor = MaterialTheme.colorScheme.surface
+                        ),
+                        onClick = { /*TODO*/ }
+                    ) {
+                        Text(
+                            text = stringResource(R.string.use_password)
+                        )
+                    }
+                }
             }
         }
     }

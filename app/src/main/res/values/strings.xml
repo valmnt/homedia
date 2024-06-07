@@ -32,6 +32,8 @@
     <string name="quick_connect_error_first_step">1. Make sure that your Jellyfin instance is operational</string>
     <string name="quick_connect_error_second_step">2. Ensure that your Jellyfin instance is accessible</string>
     <string name="quick_connect_error_third_step">3. Attempt to relaunch the app</string>
+    <string name="other_options">Other options</string>
+    <string name="use_password">Use Password</string>
 
     // Home
     <string name="libraries">Libraries</string>
@@ -40,5 +42,4 @@
     // Details
     <string name="overview">Overview</string>
     <string name="seasons">Seasons</string>
-
 </resources>
