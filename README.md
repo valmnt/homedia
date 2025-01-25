@@ -1,6 +1,4 @@
-# <img src="assets/logo.png" width="30"> media_server_docker
-
-<img src="assets/banner.png">
+# Homedia
 
 > This project aims to establish a home media server that allows you to watch your favorite movies and TV shows for free. It leverages a suite of tools, all deployed using Docker, to create a comprehensive solution for managing and streaming media content 🍿.
 
